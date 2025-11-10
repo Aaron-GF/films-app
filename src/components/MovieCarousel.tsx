@@ -35,7 +35,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <div className="flex items-center">
         <button
           onClick={prevSlide}
-          className="absolute left-0 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-all"
+          className="absolute left-0 z-10 p-2 bg-dark bg-opacity-50 text-yellow-light rounded-full hover:bg-opacity-75 transition-all"
           aria-label="Previous slide"
         >
           <svg
@@ -60,10 +60,11 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
         >
           {movies.map((movie) => (
             <div key={movie.id} className="flex shrink-0 w-1/4 px-2">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+              <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                 <img
                   src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                   alt={movie.title}
+                  title={movie.title}
                   className="w-full h-auto object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -71,11 +72,6 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
                       "https://via.placeholder.com/300x450?text=No+Image";
                   }}
                 />
-                <div className="p-3">
-                  <h3 className="text-sm font-medium text-gray-900 truncate">
-                    {movie.title}
-                  </h3>
-                </div>
               </div>
             </div>
           ))}
@@ -83,7 +79,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
 
         <button
           onClick={nextSlide}
-          className="absolute right-0 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-all"
+          className="absolute right-0 z-10 p-2 bg-dark bg-opacity-50 text-yellow-light rounded-full hover:bg-opacity-75 transition-all"
           aria-label="Next slide"
         >
           <svg

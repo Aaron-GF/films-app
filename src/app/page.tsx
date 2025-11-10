@@ -1,5 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import { MovieCarousel } from "@/components/MovieCarousel";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 export default async function Home() {  
   const data = await fetchData();
@@ -12,9 +13,12 @@ export default async function Home() {
   }));
   
   return (
-    <main className="container mx-auto px-4 py-8">
+    <>
+    <Navbar />
+    <main className="container mx-auto px-4 py-8 mt-20">
       <h1 className="text-2xl font-bold mb-6">Popular Movies</h1>
       <MovieCarousel movies={movies} />
     </main>
+    </>
   );
 }

@@ -5,14 +5,22 @@
   --light: #D6D6D6;
   --yellow-light: #FFEE32;
   --yellow-dark: #FFD100;
-  --gray-dark: #333533;
+  --gray-dark: #333533; 
+}
+
+@theme inline {
+  --color-dark: var(--dark);
+  --color-light: var(--light);
+  --color-yellow-dark: var(--yellow-dark);
+  --color-yellow-light: var(--yellow-light);
+  --color-gray-dark: var(--gray-dark);
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-roboto-mono);
 }
 
 body {
-  background: var(--dark);
+  background: var(--gray-dark);
   color: var(--light);
   font-family: var(--font-sans);
 }
@@ -20,4 +28,6 @@ body {
 button, a {
   cursor: pointer;
 }
+
+
 
