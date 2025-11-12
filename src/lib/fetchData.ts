@@ -14,5 +14,6 @@ export async function fetchData() {
     options
   );
   const data = await response.json();
+  console.log(data)
   return data;
 }

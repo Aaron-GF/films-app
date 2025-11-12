@@ -26,7 +26,12 @@ body {
 }
 
 button, a {
-  cursor: pointer;
+  @apply cursor-pointer active:scale-97 transition-transform;
+}
+
+/* barra de desplazamiento(no visible) */
+::-webkit-scrollbar {
+  display: none;
 }
 
 

@@ -12,7 +12,7 @@ interface MovieCarouselProps {
   movies: Movie[];
 }
 
-export function MovieCarousel({ movies }: MovieCarouselProps) {
+export default function MovieCarousel({ movies }: MovieCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 4;
 
