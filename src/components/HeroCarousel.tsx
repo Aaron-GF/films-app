@@ -19,7 +19,7 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Auto-advance slides
+  // Avance automático de diapositivas
   useEffect(() => {
     if (isHovered || !movies.length) return;
     

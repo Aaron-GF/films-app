@@ -59,13 +59,14 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
           }}
         >
           {movies.map((movie) => (
-            <div key={movie.id} className="flex shrink-0 w-1/4 px-2">
+            <div key={movie.id} className="flex shrink-0"
+            >
               <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                 <img
-                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
                   title={movie.title}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src =

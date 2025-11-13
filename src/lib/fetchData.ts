@@ -8,9 +8,9 @@ const options: RequestInit = {
   },
 };
 
-export async function fetchData() {
+export async function fetchData(path: string) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?&language=es-ES`,
+    `https://api.themoviedb.org/3/${path}?&language=es-ES`,
     options
   );
   const data = await response.json();

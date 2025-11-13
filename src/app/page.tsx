@@ -1,26 +1,22 @@
-import { fetchData } from "@/lib/fetchData";
 import MovieCarousel from "@/components/MovieCarousel";
 import Navbar from "@/components/Navbar/Navbar";
 import HeroCarousel from "@/components/HeroCarousel";
+import { getPopularMovies, getRecomendedMovies, getLatestMovies } from "@/lib/endpoints";
 
 export default async function Home() {
-  const data = await fetchData();
-
-  // Transform the data to match our Movie interface
-  const movies = data.results.map((movie) => ({
-    id: movie.id,
-    title: movie.title,
-    poster_path: movie.poster_path,
-    backdrop_path: movie.backdrop_path
-  }));
+  const trendingMovies = await getPopularMovies();
+  const recommendedMovies = await getRecomendedMovies();
+  const latestMovies = await getLatestMovies();
 
   return (
     <>
       <Navbar />
-      <main className="container mx-auto px-4 py-8 mt-20">
-        <HeroCarousel movies={movies} />
-        <h1 className="text-2xl font-bold mb-6">Popular Movies</h1>
-        <MovieCarousel movies={movies} />
+      <main className="flex flex-col gap-8 mx-auto p-10 mt-20">
+        <HeroCarousel movies={recommendedMovies.results} />
+        <h2 className="text-2xl font-bold">Popular Movies</h2>
+        <MovieCarousel movies={trendingMovies.results} />
+        <h2 className="text-2xl font-bold">Latest Movies</h2>
+        <MovieCarousel movies={latestMovies.results} />
       </main>
     </>
   );
