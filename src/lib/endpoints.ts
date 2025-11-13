@@ -1,16 +1,20 @@
 import { fetchData } from "@/lib/fetchData";
 
-/* Películas relevantes recomendadas */
+/* Películas destacadas recomendadas */
 export const getRecomendedMovies = () => fetchData("discover/movie");
 
-/* Tendencias */
-export const getPopularMovies = () =>
-  fetchData("discover/movie?sort_by=popularity.desc");
+/* Películas con mejores valoraciones */
+export const getBestRatedMovies = () => fetchData("movie/top_rated");
 
 /* Películas por género */
 export const getMoviesByGenre = (genreId: number) =>
   fetchData(`discover/movie?with_genres=${genreId}`);
 
-/* Más recientes */
-export const getLatestMovies = () =>
-  fetchData("discover/movie?sort_by=release_date.desc");
+/* Películas que se estrenarán próximamente */
+export const getUpcomingMovies = () => fetchData("movie/upcoming");
+
+/* Estrenos cartelera */
+export const getNowPlayingMovies = () => fetchData("movie/now_playing");
+
+/* Series destacadas */
+export const getPopularSeries = () => fetchData("tv/popular");

@@ -22,7 +22,7 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
   // Avance automático de diapositivas
   useEffect(() => {
     if (isHovered || !movies.length) return;
-    
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
     }, 6000);
@@ -44,8 +44,8 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
   if (!movies.length) return null;
 
   return (
-    <div 
-      className="relative w-full h-[500px] overflow-hidden rounded-lg shadow-lg"
+    <div
+      className="relative lg:w-10/12 w-full h-[500px] overflow-hidden rounded-lg shadow-lg mx-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -55,26 +55,30 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
           <div
             key={movie.id}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
             <div className="absolute inset-0 bg-linear-to-t from-dark to-transparent z-10" />
             <Image
-              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original${
+                movie.backdrop_path || movie.poster_path
+              }`}
               alt={movie.title}
               fill
-              className="object-contain"
+              className="object-cover object-center"
               priority={index === 0}
               sizes="100vw"
             />
             <div className="relative z-20 flex flex-col justify-end h-full p-8">
-              <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">{movie.title}</h2>
+              <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">
+                {movie.title}
+              </h2>
               {movie.overview && (
                 <p className="max-w-2xl mb-6 text-lg line-clamp-3">
                   {movie.overview}
                 </p>
               )}
-              <button className="self-start px-6 py-2 text-lg font-medium text-gray-dark bg-yellow-dark rounded-md hover:bg-yellow-light transition-colors">
+              <button className="self-start px-4 md:px-6 py-1 md:py-2 text-lg font-medium text-gray-dark bg-yellow-dark rounded-md hover:bg-yellow-light transition-colors mb-4">
                 Ver más
               </button>
             </div>
@@ -82,14 +86,16 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
         ))}
       </div>
 
-      {/* Indicators */}
+      {/* Indicadores */}
       <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 space-x-2">
         {movies.map((_, index) => (
           <button
             key={index}
             type="button"
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-yellow-light w-8' : 'bg-light/50 hover:bg-light'
+            className={`size-1 md:size-3 rounded-full transition-colors ${
+              index === currentSlide
+                ? "bg-yellow-light"
+                : "bg-light/50 hover:bg-light"
             }`}
             aria-label={`Ir a la diapositiva ${index + 1}`}
             onClick={() => goToSlide(index)}
@@ -97,7 +103,7 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
         ))}
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Botones de navegación */}
       <button
         type="button"
         className="absolute top-1/2 left-4 z-20 p-2 -translate-y-1/2 bg-black/50 rounded-full hover:bg-black/75 transition-colors"
