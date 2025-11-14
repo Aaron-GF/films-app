@@ -9,7 +9,6 @@ import {
   getUpcomingMovies,
   getRecomendedMovies,
   getNowPlayingMovies,
-  getPopularSeries,
 } from "@/lib/endpoints";
 
 export default async function Home() {

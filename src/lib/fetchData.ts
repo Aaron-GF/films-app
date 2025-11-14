@@ -9,11 +9,10 @@ const options: RequestInit = {
 };
 
 export async function fetchData(path: string) {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/${path}?&language=es-ES`,
-    options
-  );
+  const url = path.includes("?")
+    ? `https://api.themoviedb.org/3/${path}&language=es-ES`
+    : `https://api.themoviedb.org/3/${path}?language=es-ES`;
+  const response = await fetch(url, options);
   const data = await response.json();
-  console.log(data)
   return data;
 }

@@ -1,10 +1,50 @@
 "use client";
 
-export default function Searchbar() {
+import { useState} from "react";
+
+let timeoutId: NodeJS.Timeout | null = null;
+
+export default function Searchbar({
+  value,
+  onSearch,
+}: {
+  value: string;
+  onSearch: (query: string) => void;
+}) {
+  const [input, setInput] = useState(value);
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const text = event.target.value
+    setInput(text) 
+
+    // Debounce: Cancela el timeout anterior
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    timeoutId = setTimeout(() => {
+      onSearch(text)
+    }, 500)
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSearch(input);
+  };
+
   return (
-    <div className="flex items-center gap-2 bg-gray-dark rounded-full px-4 py-2">
-      <input type="text" placeholder="Search" className="outline-none" />
-      <button>
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center gap-2 bg-gray-dark rounded-full px-4 py-2"
+    >
+      <input
+        type="search"
+        placeholder="Search"
+        className="outline-none"
+        value={input}
+        onChange={handleTextChange}
+      />
+      <button type="submit">
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -19,6 +59,6 @@ export default function Searchbar() {
           />
         </svg>
       </button>
-    </div>
+    </form>
   );
 }

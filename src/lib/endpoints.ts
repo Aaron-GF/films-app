@@ -18,3 +18,6 @@ export const getNowPlayingMovies = () => fetchData("movie/now_playing");
 
 /* Series destacadas */
 export const getPopularSeries = () => fetchData("tv/popular");
+
+/* Buscador */
+export const searchMulti = (query: string) => fetchData(`search/multi?query=${encodeURIComponent(query)}`);
