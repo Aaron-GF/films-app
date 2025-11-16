@@ -21,3 +21,9 @@ export const getPopularSeries = () => fetchData("tv/popular");
 
 /* Buscador */
 export const searchMulti = (query: string) => fetchData(`search/multi?query=${encodeURIComponent(query)}`);
+
+/* Película por ID */
+export const getMovieDetails = (id: number | string) => fetchData(`movie/${id}`);
+
+/* Serie por ID */
+export const getSeriesDetails = (id: number | string) => fetchData(`tv/${id}`);

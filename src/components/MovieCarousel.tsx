@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface Movie {
   id: number;
   title: string;
   poster_path: string;
+  media_type: string;
 }
 
 interface MovieCarouselProps {
@@ -27,8 +29,6 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
       prevIndex === 0 ? movies.length - itemsPerPage : prevIndex - 1
     );
   };
-
-  const visibleMovies = movies.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -54,27 +54,31 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
 
         <div
           className="flex w-full transition-transform duration-300 ease-in-out"
-          style={{  
+          style={{
             transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
           }}
         >
-          {movies.map((movie) => (
-            <div key={movie.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
-              <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                  alt={movie.title}
-                  title={movie.title}
-                  className="w-full h-auto object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src =
-                      "https://via.placeholder.com/300x450?text=No+Image";
-                  }}
-                />
+          {movies.map((movie) => {
+            const href = movie.media_type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`;
+            return (
+              <div key={movie.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
+                <Link key={movie.id} href={href}>
+                <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    title={movie.title}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src =
+                        "https://via.placeholder.com/300x450?text=No+Image";
+                    }}
+                  />
+                </div>
+                </Link>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <button

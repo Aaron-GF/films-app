@@ -39,8 +39,8 @@ export default function Searchbar({
     >
       <input
         type="search"
-        placeholder="Search"
-        className="outline-none"
+        placeholder="¿Que estás buscando?"
+        className="outline-none placeholder:text-sm"
         value={input}
         onChange={handleTextChange}
       />

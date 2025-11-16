@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Searchbar from "@/components/Navbar/Searchbar";
 import { searchMulti } from "@/lib/endpoints";
 import { getYear } from "@/utils/getYear";
@@ -13,9 +14,10 @@ export default function Navbar() {
   const handleSearch = async (query: string) => {
     const res = await searchMulti(query);
     // Filtra los resultados para mostrar solo películas y series
-    const filteredResults = res.results.filter(
-      (item) => item.media_type === "movie" || item.media_type === "tv"
-    ).slice(0, 6).sort((a, b) => getYear(b) - getYear(a));
+    const filteredResults = res.results
+      .filter((item) => item.media_type === "movie" || item.media_type === "tv")
+      .slice(0, 6)
+      .sort((a, b) => getYear(b) - getYear(a));
     setSearchResults(filteredResults);
     setShowDropdown(true);
   };
@@ -48,20 +50,29 @@ export default function Navbar() {
       {showDropdown && (
         <ul className="absolute top-19 right-0 bg-dark w-3/10" tabIndex={-1}>
           {searchResults.map((item) => (
-            <li
+            <Link
               key={item.id}
-              onClick={() => handleSelect(item.title)}
-              className="px-4 py-2 hover:bg-yellow-dark hover:text-dark hover:font-bold cursor-pointer"
+              href={
+                item.media_type === "movie"
+                  ? `/movie/${item.id}`
+                  : `/tv/${item.id}`
+              }
             >
-              {item.title || item.name} ({getYear(item)})
-              <span className="text-yellow-light text-xs bg-gray-dark rounded-full px-2 py-1 ml-2">
-                {item.media_type === "movie"
-                  ? "Película"
-                  : item.media_type === "tv"
-                  ? "Serie"
-                  : "Otro"}
-              </span>
-            </li>
+              <li
+                key={item.id}
+                onClick={() => handleSelect(item)}
+                className="px-4 py-2 hover:bg-yellow-dark hover:text-dark hover:font-bold cursor-pointer"
+              >
+                {item.title || item.name} ({getYear(item)})
+                <span className="text-yellow-light text-xs bg-gray-dark rounded-full px-2 py-1 ml-2">
+                  {item.media_type === "movie"
+                    ? "Película"
+                    : item.media_type === "tv"
+                    ? "Serie"
+                    : "Otro"}
+                </span>
+              </li>
+            </Link>
           ))}
         </ul>
       )}

@@ -29,10 +29,26 @@ button, a {
   @apply cursor-pointer active:scale-97 transition-transform;
 }
 
-/* barra de desplazamiento(no visible) */
+/* oculta la barra de desplazamiento */
 ::-webkit-scrollbar {
   display: none;
 }
 
+/* modifica el boton de borrar por defecto de la barra de busqueda */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1.2em;
+  width: 1.2em;
+  background: url("/icons/circle-x.svg") no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: 1;
+  pointer-events: all;
+}
 
