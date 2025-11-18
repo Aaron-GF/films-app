@@ -1,4 +1,4 @@
-import { getMovieDetails } from "@/lib/endpoints";
+import { getMovies } from "@/lib/endpoints";  
 import Image from "next/image";
 
 export default async function MovieDetails({
@@ -7,7 +7,7 @@ export default async function MovieDetails({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const movie = await getMovieDetails(id);
+  const movie = await getMovies.details(id);
   console.log(movie);
 
   return (
@@ -32,12 +32,13 @@ export default async function MovieDetails({
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="relative w-1/5 rounded overflow-hidden shadow-lg">
+          <div className="relative w-1/5 rounded shadow-lg">
             <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
               alt={movie.title}
-              fill
-              className="object-cover"
+              width={500}
+              height={750}
+              className="object-contain rounded"
               priority
             />
           </div>

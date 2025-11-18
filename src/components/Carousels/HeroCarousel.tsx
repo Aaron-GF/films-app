@@ -4,47 +4,48 @@ import { useState, useEffect } from "react";
 import Image from "next/image"; // Optimizado para cargar imágenes
 import Link from "next/link";
 
-interface Movie {
+interface MediaType {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   poster_path: string;
   backdrop_path?: string;
   overview?: string;
-  media_type: string;
+  media_type: "movie" | "tv";
 }
 
 interface HeroCarouselProps {
-  movies: Movie[];
+  media: MediaType[];
 }
 
-export default function HeroCarousel({ movies }: HeroCarouselProps) {
-  console.log(movies);
+export default function HeroCarousel({ media }: HeroCarouselProps) {
+  console.log(media);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // Avance automático de diapositivas
   useEffect(() => {
-    if (isHovered || !movies.length) return;
+    if (isHovered || !media.length) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) => (prev === media.length - 1 ? 0 : prev + 1));
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [currentSlide, isHovered, movies.length]);
+  }, [currentSlide, isHovered, media.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? media.length - 1 : prev - 1));
   };
 
   const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev === media.length - 1 ? 0 : prev + 1));
   };
-  if (!movies.length) return null;
+  if (!media.length) return null;
 
   return (
     <div
@@ -54,14 +55,14 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
     >
       {/* Slides */}
       <div className="relative w-full h-full">
-        {movies.map((movie, index) => {
+        {media.map((mediaItem, index) => {
           const href =
-            movie.media_type === "movie"
-              ? `/movie/${movie.id}`
-              : `/tv/${movie.id}`;
+            mediaItem.media_type === "movie"
+              ? `/movie/${mediaItem.id}`
+              : `/tv/${mediaItem.id}`;
           return (
             <div
-              key={movie.id}
+              key={mediaItem.id}
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
@@ -69,9 +70,9 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
               <div className="absolute inset-0 bg-linear-to-t from-dark to-transparent z-10" />
               <Image
                 src={`https://image.tmdb.org/t/p/original${
-                  movie.backdrop_path || movie.poster_path
+                  mediaItem.backdrop_path || mediaItem.poster_path
                 }`}
-                alt={movie.title}
+                alt={mediaItem.title || mediaItem.name}
                 fill
                 className="object-cover object-center"
                 priority={index === 0}
@@ -79,14 +80,14 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
               />
               <div className="relative z-20 flex flex-col justify-end h-full p-8">
                 <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">
-                  {movie.title}
+                  {mediaItem.title || mediaItem.name}
                 </h2>
-                {movie.overview && (
+                {mediaItem.overview && (
                   <p className="max-w-2xl mb-6 text-lg line-clamp-3">
-                    {movie.overview}
+                    {mediaItem.overview}
                   </p>
                 )}
-                <Link key={movie.id} href={href}>
+                <Link key={mediaItem.id} href={href}>
                   <button className="self-start px-4 md:px-6 py-1 md:py-2 text-lg font-medium text-gray-dark bg-yellow-dark rounded-md hover:bg-yellow-light transition-colors mb-4">
                     Ver más
                   </button>
@@ -99,7 +100,7 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
 
       {/* Indicadores de posición */}
       <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 space-x-2">
-        {movies.map((_, index) => (
+        {media.map((_, index) => (
           <button
             key={index}
             type="button"

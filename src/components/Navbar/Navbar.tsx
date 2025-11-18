@@ -12,15 +12,17 @@ export default function Navbar() {
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleSearch = async (query: string) => {
-    const res = await searchMulti(query);
-    // Filtra los resultados para mostrar solo películas y series
-    const filteredResults = res.results
-      .filter((item) => item.media_type === "movie" || item.media_type === "tv")
-      .slice(0, 6)
-      .sort((a, b) => getYear(b) - getYear(a));
-    setSearchResults(filteredResults);
-    setShowDropdown(true);
-  };
+  const res = await searchMulti(query);
+  // Solo continúa si results es un array
+  const filteredResults = Array.isArray(res.results)
+    ? res.results
+        .filter((item) => item.media_type === "movie" || item.media_type === "tv")
+        .slice(0, 6)
+        .sort((a, b) => getYear(b) - getYear(a))
+    : [];
+  setSearchResults(filteredResults);
+  setShowDropdown(true);
+};
 
   const handleSelect = (value) => {
     setSelectedValue(value.title || value.name);
@@ -30,7 +32,9 @@ export default function Navbar() {
 
   return (
     <header className="flex justify-between items-center fixed top-0 z-50 px-10 py-4 w-full border-b border-yellow-dark bg-dark">
-      <h1 className="text-2xl font-bold text-yellow-dark">Filmix</h1>
+      <Link href="/">
+        <h1 className="text-2xl font-bold text-yellow-dark">Filmix</h1>
+      </Link>
 
       {/* Botones de navegación */}
       <div className="flex gap-10">

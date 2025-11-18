@@ -1,32 +1,37 @@
 import { fetchData } from "@/lib/fetchData";
 
-/* Películas destacadas recomendadas */
-export const getRecomendedMovies = () => fetchData("discover/movie");
+/* ==================================
+   Películas
+================================== */
+export const getMovies = {
+  list: (type: "popular" | "top_rated" | "now_playing" | "upcoming") =>
+    fetchData(`movie/${type}`),
+  details: (id: number | string, endpoint?: "credits" | "videos" | "similar") =>
+    fetchData(`movie/${id}/${endpoint}`),
+};
 
-/* Lo más popular */
-export const getTrendingAll = () => fetchData("trending/all/week");
+/* ==================================
+   Series
+================================== */
+export const getSeries = {
+  list: (type: "popular" | "top_rated" | "airing_today" | "upcoming") =>
+    fetchData(`tv/${type}`),
+  details: (id: number | string, endpoint?: "credits" | "videos" | "similar") =>
+    fetchData(`tv/${id}/${endpoint}`),
+};
 
-/* Películas con mejores valoraciones */
-export const getBestRatedMovies = () => fetchData("movie/top_rated");
+/* ==================================
+   Utilidades generales
+================================== */
+export const searchMulti = (query: string) =>
+  fetchData(`search/multi?query=${encodeURIComponent(query)}`);
 
-/* Películas por género */
-export const getMoviesByGenre = (genreId: number) =>
-  fetchData(`discover/movie?with_genres=${genreId}`);
+export const getTrending = (
+  mediaType: "movie" | "tv" | "all",
+  timeWindow: "day" | "week"
+) => fetchData(`trending/${mediaType}/${timeWindow}`);
 
-/* Películas que se estrenarán próximamente */
-export const getUpcomingMovies = () => fetchData("movie/upcoming");
-
-/* Estrenos cartelera */
-export const getNowPlayingMovies = () => fetchData("movie/now_playing");
-
-/* Series destacadas */
-export const getPopularSeries = () => fetchData("tv/popular");
-
-/* Buscador */
-export const searchMulti = (query: string) => fetchData(`search/multi?query=${encodeURIComponent(query)}`);
-
-/* Película por ID */
-export const getMovieDetails = (id: number | string) => fetchData(`movie/${id}`);
-
-/* Serie por ID */
-export const getSeriesDetails = (id: number | string) => fetchData(`tv/${id}`);
+export const getDiscover = (
+  category: "movie" | "tv",
+  query?: string 
+) => fetchData(`discover/${category}${query ? `?${query}` : ""}`);
