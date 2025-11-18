@@ -1,35 +1,34 @@
 /* Componentes */
-import MovieCarousel from "@/components/MovieCarousel";
-import Navbar from "@/components/Navbar/Navbar";
+import MediaCarousel from "@/components/MediaCarousel";
 import HeroCarousel from "@/components/HeroCarousel";
 
 /* Endpoints */
 import {
   getBestRatedMovies,
-  getUpcomingMovies,
+  getTrendingAll,
   getRecomendedMovies,
   getNowPlayingMovies,
+  getPopularSeries,
 } from "@/lib/endpoints";
 
 export default async function Home() {
   const recommendedMovies = await getRecomendedMovies();
   const nowPlayingMovies = await getNowPlayingMovies();
-  const upcomingMovies = await getUpcomingMovies();
   const bestRatedMovies = await getBestRatedMovies();
-
+  const popularSeries = await getPopularSeries();
+  const trendingAll = await getTrendingAll();
 
   return (
-    <>
-      <Navbar />
-      <main className="flex flex-col gap-8 mx-auto p-4 md:p-10 mt-20">
-        <HeroCarousel movies={recommendedMovies.results} />
-        <h2 className="text-2xl font-bold">Próximamente</h2>
-        <MovieCarousel movies={upcomingMovies.results} />
-        <h2 className="text-2xl font-bold">En cartelera</h2>
-        <MovieCarousel movies={nowPlayingMovies.results} />
-        <h2 className="text-2xl font-bold">Mejor valoradas</h2>
-        <MovieCarousel movies={bestRatedMovies.results} />
-      </main>
-    </>
+    <main className="flex flex-col gap-8 mx-auto p-4 md:p-10 mt-20">
+      <HeroCarousel movies={recommendedMovies.results} />
+      <h2 className="text-2xl font-bold">Lo más popular de la semana</h2>
+      <MediaCarousel media={trendingAll.results} />
+      <h2 className="text-2xl font-bold">Estrenos en cartelera</h2>
+      <MediaCarousel media={nowPlayingMovies.results} />
+      <h2 className="text-2xl font-bold">Series más vistas</h2>
+      <MediaCarousel media={popularSeries.results} />
+      <h2 className="text-2xl font-bold">Peliculas mejor valoradas</h2>
+      <MediaCarousel media={bestRatedMovies.results} />
+    </main>
   );
 }

@@ -1,6 +1,8 @@
 import { Inter, Roboto_Mono } from 'next/font/google'
 import "@/styles/globals.css";  
 
+import Navbar from '@/components/Navbar/Navbar'
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -24,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${inter.variable} ${roboto_mono.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

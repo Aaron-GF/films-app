@@ -7,7 +7,7 @@ export default async function SeriesDetails({ params }: { params: Promise<{ id: 
     console.log(series);
 
     return (
-        <main className="relative min-h-screen">
+        <main className="relative min-h-screen mt-19">
           {/* Fondo panorámico */}
           {series.backdrop_path && (
             <div className="absolute inset-0 -z-10">

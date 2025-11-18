@@ -3,6 +3,9 @@ import { fetchData } from "@/lib/fetchData";
 /* Películas destacadas recomendadas */
 export const getRecomendedMovies = () => fetchData("discover/movie");
 
+/* Lo más popular */
+export const getTrendingAll = () => fetchData("trending/all/week");
+
 /* Películas con mejores valoraciones */
 export const getBestRatedMovies = () => fetchData("movie/top_rated");
 

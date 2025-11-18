@@ -11,7 +11,7 @@ export default async function MovieDetails({
   console.log(movie);
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen mt-19">
       {/* Fondo panorámico */}
       {movie.backdrop_path && (
         <div className="absolute inset-0 -z-10">

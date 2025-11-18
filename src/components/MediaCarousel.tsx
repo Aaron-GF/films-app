@@ -3,30 +3,31 @@
 import { useState } from "react";
 import Link from "next/link";
 
-interface Movie {
+interface MediaItem {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   poster_path: string;
-  media_type: string;
+  media_type: "movie" | "tv";
 }
 
-interface MovieCarouselProps {
-  movies: Movie[];
+interface MediaCarouselProps {
+  media: MediaItem[];
 }
 
-export default function MovieCarousel({ movies }: MovieCarouselProps) {
+export default function MediaCarousel({ media }: MediaCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 6;
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex >= movies.length - itemsPerPage ? 0 : prevIndex + 1
+      prevIndex >= media.length - itemsPerPage ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? movies.length - itemsPerPage : prevIndex - 1
+      prevIndex === 0 ? media.length - itemsPerPage : prevIndex - 1
     );
   };
 
@@ -58,16 +59,16 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
             transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
           }}
         >
-          {movies.map((movie) => {
-            const href = movie.media_type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`;
+          {media.map((mediaItem) => {
+            const href = mediaItem.media_type === "movie" ? `/movie/${mediaItem.id}` : `/tv/${mediaItem.id}`;
             return (
-              <div key={movie.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
-                <Link key={movie.id} href={href}>
+              <div key={mediaItem.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
+                <Link key={mediaItem.id} href={href}>
                 <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                    title={movie.title}
+                    src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`}
+                    alt={mediaItem.title || mediaItem.name}
+                    title={mediaItem.title || mediaItem.name}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src =

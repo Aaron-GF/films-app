@@ -34,6 +34,11 @@ export default function Navbar() {
 
       {/* Botones de navegación */}
       <div className="flex gap-10">
+        <Link href="/">
+          <button className="text-yellow-dark hover:text-yellow-light transition-colors">
+            Inicio
+          </button>
+        </Link>
         <button className="text-yellow-dark hover:text-yellow-light transition-colors">
           Películas
         </button>
