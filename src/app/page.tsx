@@ -6,32 +6,28 @@ import HeroCarousel from "@/components/Carousels/HeroCarousel";
 import {
   getMovies,
   getSeries,
-  getDiscover,
   getTrending,
 } from "@/lib/endpoints";
 
 export default async function Home() {
-  // Tendencias en series y películas
-  const trending = await getTrending("all", "week");
-
-  // Estrenos en cartelera
-  const nowPlayingMovies = await getMovies.list("now_playing");
-
-  // Series populares
-  const popularSeries = await getSeries.list("popular");
-
-  // Películas con mejores valoraciones
-  const bestRatedMovies = await getMovies.list("top_rated");
-
+  const trending = await getTrending("all", "week"); // Tendencias en series y películas
+  const nowPlayingMovies = await getMovies.list("now_playing"); // Estrenos en cartelera
+  const popularSeries = await getSeries.list("popular"); // Series populares
+  const newEpisodes = await getSeries.list("on_the_air"); // Series con nuevos episodios esta semana
+  const upcomingMovies = await getMovies.list("upcoming"); // Proximos estrenos de películas
+  const bestRatedMovies = await getMovies.list("top_rated"); // Películas con mejores valoraciones
+ 
   return (
     <main className="flex flex-col gap-8 mx-auto p-4 md:p-10 mt-20">
       <HeroCarousel media={trending.results} />
-      <h2 className="text-2xl font-bold">Lo más popular de la semana</h2>
+      <h2 className="text-2xl font-bold">Series populares</h2>
       <MediaCarousel media={popularSeries.results} />
+      <h2 className="text-2xl font-bold">Series con nuevos episodios esta semana</h2>
+      <MediaCarousel media={newEpisodes.results} />
       <h2 className="text-2xl font-bold">Estrenos en cartelera</h2>
       <MediaCarousel media={nowPlayingMovies.results} />
-      <h2 className="text-2xl font-bold">Series más vistas</h2>
-      <MediaCarousel media={popularSeries.results} />
+      <h2 className="text-2xl font-bold">Proximos estrenos de películas</h2>
+      <MediaCarousel media={upcomingMovies.results} />
       <h2 className="text-2xl font-bold">Peliculas mejor valoradas</h2>
       <MediaCarousel media={bestRatedMovies.results} />
     </main>

@@ -1,3 +1,4 @@
+import MediaCast from "@/components/Cast/MediaCast";
 import { getMovies } from "@/lib/endpoints";  
 import Image from "next/image";
 
@@ -8,7 +9,8 @@ export default async function MovieDetails({
 }) {
   const { id } = await params;
   const movie = await getMovies.details(id);
-  console.log(movie);
+  const cast = await getMovies.detailsEndpoint(id, "credits");
+  console.log(cast);
 
   return (
     <main className="relative min-h-screen mt-19">
@@ -17,7 +19,7 @@ export default async function MovieDetails({
         <div className="absolute inset-0 -z-10">
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-            alt={`${movie.title} background`}
+            alt={`${movie.title} fondo`}
             fill
             className="object-cover object-center opacity-30"
             priority
@@ -34,8 +36,8 @@ export default async function MovieDetails({
         <div className="flex flex-col md:flex-row gap-8">
           <div className="relative w-1/5 rounded shadow-lg">
             <Image
-              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title || "Poster de la película"}
               width={500}
               height={750}
               className="object-contain rounded"
@@ -72,6 +74,7 @@ export default async function MovieDetails({
           </div>
         </div>
       </div>
+      <MediaCast cast={cast.cast}/>
     </main>
   );
 }

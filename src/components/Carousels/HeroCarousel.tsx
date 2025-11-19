@@ -29,7 +29,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === media.length - 1 ? 0 : prev + 1));
-    }, 6000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [currentSlide, isHovered, media.length]);

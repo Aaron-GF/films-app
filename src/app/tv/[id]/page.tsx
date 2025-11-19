@@ -17,7 +17,7 @@ export default async function SeriesDetails({
         <div className="absolute inset-0 -z-10">
           <Image
             src={`https://image.tmdb.org/t/p/original${series.backdrop_path}`}
-            alt={`${series.name} background`}
+            alt={`${series.name} fondo`}
             fill
             className="object-cover object-center opacity-30"
             priority
@@ -34,8 +34,8 @@ export default async function SeriesDetails({
         <div className="flex flex-col md:flex-row gap-8">
           <div className="relative w-1/5 rounded overflow-hidden shadow-lg">
             <Image
-              src={`https://image.tmdb.org/t/p/original${series.poster_path}`}
-              alt={series.name}
+              src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
+              alt={series.name || "Poster de la serie"}
               width={500}
               height={750}
               className="object-contain rounded"
