@@ -1,3 +1,4 @@
+import MediaCredits from "@/components/Credits/MediaCredits";
 import { getSeries } from "@/lib/endpoints";   
 import Image from "next/image";
 
@@ -8,13 +9,14 @@ export default async function SeriesDetails({
 }) {
   const { id } = await params;
   const series = await getSeries.details(id);
+  const credits = await getSeries.detailsEndpoint(id, "credits");
   console.log(series);
 
   return (
-    <main className="relative min-h-screen mt-19">
+    <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {series.backdrop_path && (
-        <div className="absolute inset-0 -z-10">
+        <div className="fixed inset-0 -z-10 mt-20">
           <Image
             src={`https://image.tmdb.org/t/p/original${series.backdrop_path}`}
             alt={`${series.name} fondo`}
@@ -22,7 +24,7 @@ export default async function SeriesDetails({
             className="object-cover object-center opacity-30"
             priority
           />
-          <div className="absolute inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
+          <div className="fixed inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
         </div>
       )}
 
@@ -72,6 +74,7 @@ export default async function SeriesDetails({
           </div>
         </div>
       </div>
+      <MediaCredits cast={credits.cast} />
     </main>
   );
 }

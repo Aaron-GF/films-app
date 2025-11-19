@@ -1,5 +1,5 @@
-import MediaCast from "@/components/Cast/MediaCast";
-import { getMovies } from "@/lib/endpoints";  
+import MediaCredits from "@/components/Credits/MediaCredits";
+import { getMovies } from "@/lib/endpoints";
 import Image from "next/image";
 
 export default async function MovieDetails({
@@ -9,14 +9,14 @@ export default async function MovieDetails({
 }) {
   const { id } = await params;
   const movie = await getMovies.details(id);
-  const cast = await getMovies.detailsEndpoint(id, "credits");
-  console.log(cast);
+  const credits = await getMovies.detailsEndpoint(id, "credits");
+  console.log(credits);
 
   return (
-    <main className="relative min-h-screen mt-19">
+    <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {movie.backdrop_path && (
-        <div className="absolute inset-0 -z-10">
+        <div className="fixed inset-0 -z-10">
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={`${movie.title} fondo`}
@@ -24,7 +24,7 @@ export default async function MovieDetails({
             className="object-cover object-center opacity-30"
             priority
           />
-          <div className="absolute inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
+          <div className="fixed inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
         </div>
       )}
 
@@ -74,7 +74,7 @@ export default async function MovieDetails({
           </div>
         </div>
       </div>
-      <MediaCast cast={cast.cast}/>
+      <MediaCredits cast={credits.cast} crew={credits.crew} />
     </main>
   );
 }

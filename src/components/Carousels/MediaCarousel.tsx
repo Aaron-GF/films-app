@@ -8,7 +8,6 @@ interface MediaItem {
   title?: string;
   name?: string;
   poster_path: string;
-  media_type: "movie" | "tv";
 }
 
 interface MediaCarouselProps {
@@ -60,7 +59,7 @@ export default function MediaCarousel({ media }: MediaCarouselProps) {
           }}
         >
           {media.map((mediaItem) => {
-            const href = mediaItem.media_type === "movie" ? `/movie/${mediaItem.id}` : `/tv/${mediaItem.id}`;
+            const href = mediaItem.title ? `/movie/${mediaItem.id}` : `/tv/${mediaItem.id}`;
             return (
               <div key={mediaItem.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
                 <Link key={mediaItem.id} href={href}>
