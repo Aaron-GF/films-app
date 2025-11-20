@@ -16,7 +16,7 @@ export default async function SeriesDetails({
     <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {series.backdrop_path && (
-        <div className="fixed inset-0 -z-10 mt-20">
+        <div className="fixed inset-0 -z-10 mt-19">
           <Image
             src={`https://image.tmdb.org/t/p/original${series.backdrop_path}`}
             alt={`${series.name} fondo`}

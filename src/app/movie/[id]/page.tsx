@@ -1,6 +1,12 @@
+/* Componentes */
 import MediaCredits from "@/components/Credits/MediaCredits";
 import StarRating from "@/components/Ratings/StarRating";
+import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
+
+/* Endpoints */
 import { getMovies } from "@/lib/endpoints";
+
+/* Imágenes */
 import Image from "next/image";
 
 export default async function MovieDetails({
@@ -11,13 +17,14 @@ export default async function MovieDetails({
   const { id } = await params;
   const movie = await getMovies.details(id);
   const credits = await getMovies.detailsEndpoint(id, "credits");
-  console.log(movie);
+  const videos = await getMovies.detailsEndpoint(id, "videos");
+  console.log(videos);
 
   return (
     <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {movie.backdrop_path && (
-        <div className="fixed inset-0 -z-10 mt-20">
+        <div className="fixed inset-0 -z-10 mt-19">
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={`${movie.title} fondo`}
@@ -82,9 +89,9 @@ export default async function MovieDetails({
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <line x1="10" x2="14" y1="2" y2="2" />
                   <line x1="12" x2="15" y1="14" y2="11" />
@@ -95,6 +102,7 @@ export default async function MovieDetails({
             )}
           </div>
         </div>
+        <TrailerPlayer videos={videos.results} />
       </div>
       <MediaCredits cast={credits.cast} crew={credits.crew} />
     </main>
