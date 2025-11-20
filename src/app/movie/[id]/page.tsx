@@ -1,4 +1,5 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
+import StarRating from "@/components/Ratings/StarRating";
 import { getMovies } from "@/lib/endpoints";
 import Image from "next/image";
 
@@ -10,31 +11,30 @@ export default async function MovieDetails({
   const { id } = await params;
   const movie = await getMovies.details(id);
   const credits = await getMovies.detailsEndpoint(id, "credits");
-  console.log(credits);
+  console.log(movie);
 
   return (
     <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {movie.backdrop_path && (
-        <div className="fixed inset-0 -z-10">
+        <div className="fixed inset-0 -z-10 mt-20">
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={`${movie.title} fondo`}
             fill
-            className="object-cover object-center opacity-30"
+            className="object-cover object-center opacity-25"
             priority
           />
-          <div className="fixed inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto p-6 relative z-10">
+      <div className="max-w-6xl mx-auto p-6 z-10">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
           {movie.title}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="relative w-1/5 rounded shadow-lg">
+          <div className="w-1/5 shadow-lg">
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title || "Poster de la película"}
@@ -60,9 +60,10 @@ export default async function MovieDetails({
             )}
 
             {movie.vote_average !== undefined && (
-              <p>
-                <strong>Valoración:</strong> {movie.vote_average} / 10
-              </p>
+              <>
+                <strong>Valoración:</strong>
+                <StarRating rating={movie.vote_average} />
+              </>
             )}
 
             {movie.genres?.length > 0 && (
@@ -70,6 +71,27 @@ export default async function MovieDetails({
                 <strong>Géneros:</strong>{" "}
                 {movie.genres.map((g) => g.name).join(", ")}
               </p>
+            )}
+
+            {movie.runtime && (
+              <span className="inline-flex items-center gap-2 bg-gray-dark px-3 py-2 rounded-full text-base">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="10" x2="14" y1="2" y2="2" />
+                  <line x1="12" x2="15" y1="14" y2="11" />
+                  <circle cx="12" cy="14" r="8" />
+                </svg>
+                {movie.runtime} min
+              </span>
             )}
           </div>
         </div>

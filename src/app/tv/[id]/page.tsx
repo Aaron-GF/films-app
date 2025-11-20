@@ -1,6 +1,7 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
-import { getSeries } from "@/lib/endpoints";   
+import { getSeries } from "@/lib/endpoints";
 import Image from "next/image";
+import StarRating from "@/components/Ratings/StarRating";
 
 export default async function SeriesDetails({
   params,
@@ -10,7 +11,6 @@ export default async function SeriesDetails({
   const { id } = await params;
   const series = await getSeries.details(id);
   const credits = await getSeries.detailsEndpoint(id, "credits");
-  console.log(series);
 
   return (
     <main className="min-h-screen mt-20">
@@ -21,20 +21,19 @@ export default async function SeriesDetails({
             src={`https://image.tmdb.org/t/p/original${series.backdrop_path}`}
             alt={`${series.name} fondo`}
             fill
-            className="object-cover object-center opacity-30"
+            className="object-cover object-center opacity-25"
             priority
           />
-          <div className="fixed inset-0 bg-linear-to-t from-dark via-transparent to-dark" />
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto p-6 relative z-10">
+      <div className="max-w-6xl mx-auto p-6 z-10">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
           {series.name}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="relative w-1/5 rounded overflow-hidden shadow-lg">
+          <div className="w-1/5 rounded overflow-hidden shadow-lg">
             <Image
               src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
               alt={series.name || "Poster de la serie"}
@@ -60,9 +59,12 @@ export default async function SeriesDetails({
             )}
 
             {series.vote_average !== undefined && (
-              <p>
-                <strong>Valoración:</strong> {series.vote_average} / 10
-              </p>
+              <div>
+                <strong>Valoración:</strong>
+                <div className="mt-2">
+                  <StarRating rating={series.vote_average} />
+                </div>
+              </div>
             )}
 
             {series.genres?.length > 0 && (
