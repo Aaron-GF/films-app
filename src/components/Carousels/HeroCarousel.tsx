@@ -19,7 +19,6 @@ interface HeroCarouselProps {
 }
 
 export default function HeroCarousel({ media }: HeroCarouselProps) {
-  console.log(media);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -32,7 +31,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [currentSlide, isHovered, media.length]);
+  }, [isHovered, media.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);

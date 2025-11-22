@@ -2,18 +2,15 @@
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 
-type Videos = {
+type Video = {
   key: string;
-  site: "YouTube";
-  type: "Trailer";
 };
 
-export default function TrailerPlayer({ videos }: { videos: Videos[] | null }) {
+export default function TrailerPlayer({ videos }: { videos: Video[] | null }) {
   const [trailer, setTrailer] = useState<string | null>(null);
   const [isMiniPlayer, setIsMiniPlayer] = useState(false);
 
   const handlePlayTrailer = () => {
-    // Validar que videos existe y tiene al menos un elemento
     if (videos && videos.length > 0) {
       setTrailer(videos[0].key);
       setIsMiniPlayer(false);
@@ -60,7 +57,7 @@ export default function TrailerPlayer({ videos }: { videos: Videos[] | null }) {
 
       {trailer && (
         <>
-          {/* Fondo oscuro con transición de opacidad */}
+          {/* Fondo oscuro con transición de opacidad para el modal */}
           <div
             className={`fixed inset-0 z-50 bg-dark/80 transition-opacity duration-800 ${
               isMiniPlayer ? "opacity-0 pointer-events-none" : "opacity-100"

@@ -31,14 +31,14 @@ export default function MediaCredits({
             <div key={director.id} className="flex flex-col m-2">
               {director.profile_path ? (
                 <Image
-                  src={`https://image.tmdb.org/t/p/w500${director.profile_path}`}
+                  src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
                   alt={director.name}
-                  width={100}
-                  height={100}
-                  className="rounded-full object-cover mb-2 ml-4 hover:scale-150 hover:rounded-md transition-transform hover:mask-b-from-50%"
+                  width={90}
+                  height={90}
+                  className="rounded-full object-cover mb-2 ml-4 hover:scale-140 hover:rounded-md transition-transform hover:mask-b-from-70% h-40 w-25"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gray-300" />
+                <div className="size-24 rounded-full bg-gray-300" />
               )}
               <span className="font-medium mt-2 z-10">{director.name}</span>
             </div>
@@ -54,11 +54,11 @@ export default function MediaCredits({
           >
             {actor.profile_path && (
               <Image
-                src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
                 alt={actor.name}
-                className="rounded-full object-cover mb-2 hover:scale-150 hover:rounded transition-transform hover:mask-b-from-50%"
-                width={100}
-                height={100}
+                className="rounded-full object-cover mb-2 hover:scale-140 hover:rounded transition-transform hover:mask-b-from-70% size-auto"
+                width={90}
+                height={90}
               />
             )}
             <span className="font-medium z-10 mt-auto">{actor.name}</span>

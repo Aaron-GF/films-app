@@ -18,7 +18,6 @@ export default async function MovieDetails({
   const movie = await getMovies.details(id);
   const credits = await getMovies.detailsEndpoint(id, "credits");
   const videos = await getMovies.detailsEndpoint(id, "videos");
-  console.log(videos);
 
   return (
     <main className="min-h-screen mt-20">
