@@ -22,7 +22,7 @@ export default async function Home() {
       <HeroCarousel media={trending.results} />
       <h2 className="text-2xl font-bold">Series populares</h2>
       <MediaCarousel media={popularSeries.results} />
-      <h2 className="text-2xl font-bold">Series con nuevos episodios esta semana</h2>
+      <h2 className="text-2xl font-bold">Nuevos episodios</h2>
       <MediaCarousel media={newEpisodes.results} />
       <h2 className="text-2xl font-bold">Estrenos en cartelera</h2>
       <MediaCarousel media={nowPlayingMovies.results} />

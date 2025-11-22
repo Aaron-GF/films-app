@@ -23,7 +23,7 @@ export default async function MovieDetails({
     <main className="min-h-screen mt-20">
       {/* Fondo panorámico */}
       {movie.backdrop_path && (
-        <div className="fixed inset-0 -z-10 mt-19">
+        <div className="fixed inset-0 -z-10 mt-18">
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={`${movie.title} fondo`}

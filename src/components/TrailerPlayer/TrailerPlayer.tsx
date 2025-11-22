@@ -46,14 +46,15 @@ export default function TrailerPlayer({ videos }: { videos: Video[] | null }) {
 
   return (
     <section>
-      <button
-        onClick={handlePlayTrailer}
-        disabled={!videos || videos.length === 0}
-        className="flex items-center gap-2 px-4 py-2 bg-yellow-dark hover:bg-yellow-dark/80 rounded-lg font-semibold transition-colors text-dark ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
-        aria-label="Reproducir tráiler"
-      >
-        <span className="text-xl">▷</span> Ver trailer
-      </button>
+      {videos && videos.length > 0 && (
+        <button
+          onClick={handlePlayTrailer}
+          className="flex items-center gap-2 px-4 py-2 bg-yellow-dark hover:bg-yellow-dark/80 rounded-lg font-semibold transition-colors text-dark ml-auto"
+          aria-label="Reproducir tráiler"
+        >
+          <span className="text-xl">▷</span>Ver trailer
+        </button>
+      )}
 
       {trailer && (
         <>

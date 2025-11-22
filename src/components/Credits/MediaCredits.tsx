@@ -50,7 +50,7 @@ export default function MediaCredits({
         {mainCast.map((actor) => (
           <div
             key={actor.id}
-            className="flex flex-col items-center text-center min-w-30 "
+            className="flex flex-col items-center text-center max-w-30"
           >
             {actor.profile_path && (
               <Image

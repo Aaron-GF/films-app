@@ -2,6 +2,7 @@ import { Inter, Roboto_Mono } from 'next/font/google'
 import "@/styles/globals.css";  
 
 import Navbar from '@/components/Navbar/Navbar'
+import Footer from '@/components/Footer/Footer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
