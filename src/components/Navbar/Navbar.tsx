@@ -45,13 +45,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center fixed top-0 z-50 px-10 py-4 w-full bg-dark">
+    <header className="flex justify-between items-center fixed top-0 z-navbar px-10 py-4 w-full bg-dark">
       <Link href="/">
         <h1 className="text-2xl font-bold text-yellow-dark">Filmix</h1>
       </Link>
 
       {/* Botones de navegación */}
-      <div className="flex gap-10">
+      <div className="flex gap-8">
         <Link href="/">
           <button className="text-yellow-dark hover:text-yellow-light transition-colors">
             Inicio

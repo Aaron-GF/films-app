@@ -65,7 +65,7 @@ export default async function MovieDetails({
               </p>
             )}
 
-            {movie.vote_average !== undefined && (
+            {!!movie.vote_average && (
               <>
                 <strong>Valoración:</strong>
                 <StarRating rating={movie.vote_average} />

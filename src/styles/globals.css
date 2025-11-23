@@ -22,6 +22,14 @@
   --transition-duration-slow: 1000ms;
   --transition-duration-medium: 800ms;
   --transition-duration-normal: 300ms;
+
+  /* Z-index */
+  --z-index-background: -10;
+  --z-index-base: 0;
+  --z-index-content: 10;
+  --z-index-overlay: 20;
+  --z-index-navbar: 50;
+  --z-index-modal: 60;
 }
 
 body {

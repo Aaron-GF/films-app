@@ -36,7 +36,7 @@ export default function MediaCredits({ cast, crew }: MediaCreditsProps) {
         </>
       )}
       <h2 className="text-2xl font-bold m-4">Reparto principal</h2>
-      <div className="flex flex-wrap gap-10 m-2">
+      <div className="flex flex-wrap gap-12 m-2">
         {mainCast.map((actor) => (
           <div
             key={actor.id}

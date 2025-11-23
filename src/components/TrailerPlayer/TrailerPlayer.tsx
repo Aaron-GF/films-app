@@ -61,7 +61,7 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
         <>
           {/* Fondo oscuro con transición de opacidad para el modal */}
           <div
-            className={`fixed inset-0 z-50 bg-dark/80 transition-opacity duration-medium ${
+            className={`fixed inset-0 z-modal bg-dark/80 transition-opacity duration-medium ${
               isMiniPlayer ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
             onClick={() => setIsMiniPlayer(true)}
@@ -70,7 +70,7 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
 
           {/* Contenedor del reproductor con transición */}
           <div
-            className="fixed top-0 left-0 z-50 rounded-lg overflow-hidden shadow-2xl transition-all duration-medium"
+            className="fixed top-0 left-0 z-modal rounded-lg overflow-hidden shadow-2xl transition-all duration-medium"
             style={
               isMiniPlayer
                 ? {
@@ -94,7 +94,7 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
             >
               {/* Botón cerrar */}
               <button
-                className="absolute top-1 right-1 size-6 bg-red-500 rounded hover:bg-red-600 transition-colors z-60 text-dark font-bold"
+                className="absolute top-1 right-1 size-6 bg-red-500 rounded hover:bg-red-600 transition-colors z-modal text-dark font-bold"
                 onClick={handleClose}
                 aria-label="Cerrar reproductor"
               >

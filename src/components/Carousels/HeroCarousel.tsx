@@ -64,10 +64,12 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
             <div
               key={mediaItem.id}
               className={`absolute inset-0 transition-opacity duration-slow ${
-                index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+                index === currentSlide
+                  ? "opacity-100 z-content"
+                  : "opacity-0 z-base"
               }`}
             >
-              <div className="absolute inset-0 bg-linear-to-t from-dark to-transparent z-10" />
+              <div className="absolute inset-0 bg-linear-to-t from-dark to-transparent z-content" />
               <Image
                 src={`https://image.tmdb.org/t/p/original${
                   mediaItem.backdrop_path || mediaItem.poster_path
@@ -78,7 +80,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
                 priority={index === 0}
                 sizes="100vw"
               />
-              <div className="relative z-20 flex flex-col justify-end h-full p-8">
+              <div className="relative z-overlay flex flex-col justify-end h-full p-8">
                 <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">
                   {mediaItem.title || mediaItem.name}
                 </h2>
@@ -99,7 +101,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
       </div>
 
       {/* Indicadores de posición */}
-      <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 space-x-2">
+      <div className="absolute bottom-4 left-1/2 z-overlay flex -translate-x-1/2 space-x-2">
         {media.map((_, index) => (
           <button
             key={index}

@@ -36,7 +36,7 @@ export default function MediaCarousel({ media }: MediaCarouselProps) {
       <div className="flex items-center">
         <button
           onClick={prevSlide}
-          className="absolute left-0 z-10 p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+          className="absolute left-0 z-content p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
           aria-label="Previous slide"
         >
           <svg
@@ -87,7 +87,7 @@ export default function MediaCarousel({ media }: MediaCarouselProps) {
 
         <button
           onClick={nextSlide}
-          className="absolute right-0 z-10 p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
+          className="absolute right-0 z-content p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
           aria-label="Next slide"
         >
           <svg

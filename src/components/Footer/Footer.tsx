@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="relative w-full mt-20 bg-linear-to-t from-dark via-gray-dark to-transparent ">
       <div className="max-w-7xl mx-auto px-10 py-12">
         {/* Contenido principal del footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-8">
           {/* Sección sobre la aplicación */}
           <section className="space-y-4">
             <h3 className="text-2xl font-bold text-yellow-dark">Filmix</h3>

@@ -19,7 +19,7 @@ export default function SocialIcon({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="size-10 rounded-full bg-yellow-dark/10 hover:bg-yellow-dark flex items-center justify-center transition-all hover:scale-110 group"
+        className="size-10 rounded-full bg-yellow-dark/10 hover:bg-yellow-dark flex items-center justify-center transition-all duration-medium hover:scale-105 group"
         aria-label={label}
         title={title}
       >

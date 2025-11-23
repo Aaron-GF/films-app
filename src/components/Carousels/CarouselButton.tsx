@@ -15,7 +15,7 @@ export default function CarouselButton({
   return (
     <button
       type="button"
-      className={`absolute top-1/2 ${positionClass} z-20 p-2 -translate-y-1/2 bg-dark/50 rounded-full hover:bg-dark/75 transition-colors`}
+      className={`absolute top-1/2 ${positionClass} z-overlay p-2 -translate-y-1/2 bg-dark/50 rounded-full hover:bg-dark/75 transition-colors`}
       onClick={onClick}
       aria-label={label}
     >
