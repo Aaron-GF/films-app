@@ -12,17 +12,19 @@ export default function Navbar() {
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleSearch = async (query: string) => {
-  const res = await searchMulti(query);
-  // Solo continúa si results es un array
-  const filteredResults = Array.isArray(res.results)
-    ? res.results
-        .filter((item) => item.media_type === "movie" || item.media_type === "tv")
-        .slice(0, 6)
-        .sort((a, b) => getYear(b) - getYear(a))
-    : [];
-  setSearchResults(filteredResults);
-  setShowDropdown(true);
-};
+    const res = await searchMulti(query);
+    // Solo continúa si results es un array
+    const filteredResults = Array.isArray(res.results)
+      ? res.results
+          .filter(
+            (item) => item.media_type === "movie" || item.media_type === "tv"
+          )
+          .slice(0, 6)
+          .sort((a, b) => getYear(b) - getYear(a))
+      : [];
+    setSearchResults(filteredResults);
+    setShowDropdown(true);
+  };
 
   const handleSelect = (value) => {
     setSelectedValue(value.title || value.name);
@@ -31,7 +33,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center fixed top-0 z-50 px-10 py-4 w-full border-b border-yellow-dark bg-dark">
+    <header className="flex justify-between items-center fixed top-0 z-50 px-10 py-4 w-full bg-dark">
       <Link href="/">
         <h1 className="text-2xl font-bold text-yellow-dark">Filmix</h1>
       </Link>
@@ -55,7 +57,7 @@ export default function Navbar() {
       </div>
       <Searchbar onSearch={handleSearch} value={selectedValue} />
 
-      {/* Dropdown de sugerencias */}
+      {/* Desplegable de sugerencias */}
       {showDropdown && (
         <ul className="absolute top-19 right-0 bg-dark w-3/10" tabIndex={-1}>
           {searchResults.map((item) => (
@@ -85,6 +87,8 @@ export default function Navbar() {
           ))}
         </ul>
       )}
+      {/* Borde inferior decorativo */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-yellow-dark to-transparent"></div>
     </header>
   );
 }
