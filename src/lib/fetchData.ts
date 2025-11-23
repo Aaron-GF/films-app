@@ -8,7 +8,7 @@ const options: RequestInit = {
   },
 };
 
-export async function fetchData(path: string) {
+export async function fetchData<T = any>(path: string): Promise<T> {
   const url = path.includes("?")
     ? `https://api.themoviedb.org/3/${path}&language=es-ES`
     : `https://api.themoviedb.org/3/${path}?language=es-ES`;

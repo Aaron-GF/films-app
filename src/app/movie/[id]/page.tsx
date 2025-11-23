@@ -101,9 +101,9 @@ export default async function MovieDetails({
             )}
           </div>
         </div>
-        <TrailerPlayer videos={videos.results} />
+        <TrailerPlayer videos={videos?.results ?? []} />
       </div>
-      <MediaCredits cast={credits.cast} crew={credits.crew} />
+      <MediaCredits cast={credits?.cast ?? []} crew={credits?.crew} />
     </main>
   );
 }

@@ -2,12 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import Searchbar from "@/components/Navbar/Searchbar";
 import { searchMulti } from "@/lib/endpoints";
+
 import { getYear } from "@/utils/getYear";
 
+interface SearchResult {
+  id: number;
+  title?: string;
+  name?: string;
+  media_type: "movie" | "tv";
+  release_date?: string;
+  first_air_date?: string;
+}
+
 export default function Navbar() {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -17,16 +28,17 @@ export default function Navbar() {
     const filteredResults = Array.isArray(res.results)
       ? res.results
           .filter(
-            (item) => item.media_type === "movie" || item.media_type === "tv"
+            (item: any) =>
+              item.media_type === "movie" || item.media_type === "tv"
           )
           .slice(0, 6)
-          .sort((a, b) => getYear(b) - getYear(a))
+          .sort((a: SearchResult, b: SearchResult) => getYear(b) - getYear(a))
       : [];
     setSearchResults(filteredResults);
     setShowDropdown(true);
   };
 
-  const handleSelect = (value) => {
+  const handleSelect = (value: SearchResult) => {
     setSelectedValue(value.title || value.name);
     setShowDropdown(false); // Cierra el dropdown al seleccionar un valor
     setSearchResults([]); // Limpia los resultados

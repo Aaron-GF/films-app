@@ -1,22 +1,12 @@
 import Image from "next/image";
+import type { CastMember, CrewMember } from "@/types/tmdb";
 
-export default function MediaCredits({
-  cast,
-  crew,
-}: {
-  cast: Array<{
-    id: number;
-    name: string;
-    profile_path?: string | null;
-    character?: string;
-  }>;
-  crew?: Array<{
-    id: number;
-    name: string;
-    profile_path?: string | null;
-    job?: string;
-  }>;
-}) {
+interface MediaCreditsProps {
+  cast: CastMember[];
+  crew?: CrewMember[];
+}
+
+export default function MediaCredits({ cast, crew }: MediaCreditsProps) {
   const directors = crew
     ? crew.filter((member) => member.job === "Director")
     : [];

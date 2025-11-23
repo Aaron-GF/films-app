@@ -1,4 +1,8 @@
-export default function StarRating({ rating }: { rating: number }) {
+interface StarRatingProps {
+  rating: number;
+}
+
+export default function StarRating({ rating }: StarRatingProps) {
   const maxStars = 5;
   const normalizedRating = (rating / 10) * maxStars; // Convierte la valoración de 0-10 a 0-5
 

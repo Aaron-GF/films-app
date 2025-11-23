@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
+import type { Video } from "@/types/tmdb";
 
-type Video = {
-  key: string;
-};
+interface TrailerPlayerProps {
+  videos: Video[];
+}
 
-export default function TrailerPlayer({ videos }: { videos: Video[] | null }) {
+export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
   const [trailer, setTrailer] = useState<string | null>(null);
   const [isMiniPlayer, setIsMiniPlayer] = useState(false);
 
@@ -60,7 +61,7 @@ export default function TrailerPlayer({ videos }: { videos: Video[] | null }) {
         <>
           {/* Fondo oscuro con transición de opacidad para el modal */}
           <div
-            className={`fixed inset-0 z-50 bg-dark/80 transition-opacity duration-800 ${
+            className={`fixed inset-0 z-50 bg-dark/80 transition-opacity duration-medium ${
               isMiniPlayer ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
             onClick={() => setIsMiniPlayer(true)}
@@ -69,7 +70,7 @@ export default function TrailerPlayer({ videos }: { videos: Video[] | null }) {
 
           {/* Contenedor del reproductor con transición */}
           <div
-            className="fixed top-0 left-0 z-50 rounded-lg overflow-hidden shadow-2xl transition-all duration-800"
+            className="fixed top-0 left-0 z-50 rounded-lg overflow-hidden shadow-2xl transition-all duration-medium"
             style={
               isMiniPlayer
                 ? {

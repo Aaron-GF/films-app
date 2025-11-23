@@ -1,31 +1,29 @@
 "use client";
 
-import { useState} from "react";
+import { useState, useRef } from "react";
 
-let timeoutId: NodeJS.Timeout | null = null;
-
-export default function Searchbar({
-  value,
-  onSearch,
-}: {
+interface SearchbarProps {
   value: string;
   onSearch: (query: string) => void;
-}) {
+}
+
+export default function Searchbar({ value, onSearch }: SearchbarProps) {
   const [input, setInput] = useState(value);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const text = event.target.value
-    setInput(text) 
+    const text = event.target.value;
+    setInput(text);
 
     // Debounce: Cancela el timeout anterior
-    if (timeoutId) {
-      clearTimeout(timeoutId)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
 
-    timeoutId = setTimeout(() => {
-      onSearch(text)
-    }, 500)
-  }
+    timeoutRef.current = setTimeout(() => {
+      onSearch(text);
+    }, 500);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

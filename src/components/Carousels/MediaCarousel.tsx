@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface MediaItem {
@@ -53,28 +54,31 @@ export default function MediaCarousel({ media }: MediaCarouselProps) {
         </button>
 
         <div
-          className="flex w-full transition-transform duration-300 ease-in-out"
+          className="flex w-full transition-transform duration-normal ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
           }}
         >
           {media.map((mediaItem) => {
-            const href = mediaItem.title ? `/movie/${mediaItem.id}` : `/tv/${mediaItem.id}`;
+            const href = mediaItem.title
+              ? `/movie/${mediaItem.id}`
+              : `/tv/${mediaItem.id}`;
             return (
-              <div key={mediaItem.id} className="flex shrink-0 w-1/3 lg:w-1/6 px-2">
+              <div
+                key={mediaItem.id}
+                className="flex shrink-0 w-1/3 lg:w-1/6 px-2"
+              >
                 <Link key={mediaItem.id} href={href}>
-                <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`}
-                    alt={mediaItem.title || mediaItem.name}
-                    title={mediaItem.title || mediaItem.name}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src =
-                        "https://via.placeholder.com/300x450?text=No+Image";
-                    }}
-                  />
-                </div>
+                  <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-normal cursor-pointer">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`}
+                      alt={mediaItem.title || mediaItem.name}
+                      title={mediaItem.title || mediaItem.name}
+                      width={300}
+                      height={450}
+                      className="w-full h-auto"
+                    />
+                  </div>
                 </Link>
               </div>
             );

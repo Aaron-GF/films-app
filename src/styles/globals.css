@@ -2,10 +2,10 @@
 
 :root {
   --dark: #202020;
-  --light: #D6D6D6;
-  --yellow-light: #FFEE32;
-  --yellow-dark: #FFD100;
-  --gray-dark: #333533; 
+  --light: #d6d6d6;
+  --yellow-light: #ffee32;
+  --yellow-dark: #ffd100;
+  --gray-dark: #333533;
 }
 
 @theme inline {
@@ -17,6 +17,11 @@
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-roboto-mono);
+
+  /* Transiciones */
+  --transition-duration-slow: 1000ms;
+  --transition-duration-medium: 800ms;
+  --transition-duration-normal: 300ms;
 }
 
 body {
@@ -25,7 +30,8 @@ body {
   font-family: var(--font-sans);
 }
 
-button, a {
+button,
+a {
   @apply cursor-pointer active:scale-97 transition-transform;
 }
 
@@ -51,4 +57,3 @@ input[type="search"]:focus::-webkit-search-cancel-button {
   opacity: 1;
   pointer-events: all;
 }
-

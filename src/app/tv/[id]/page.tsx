@@ -77,9 +77,9 @@ export default async function SeriesDetails({
             )}
           </div>
         </div>
-        <TrailerPlayer videos={videos.results} />
+        <TrailerPlayer videos={videos?.results ?? []} />
       </div>
-      <MediaCredits cast={credits.cast} />
+      <MediaCredits cast={credits?.cast ?? []} />
     </main>
   );
 }
