@@ -6,6 +6,9 @@ import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
 /* Endpoints */
 import { getMovies } from "@/lib/endpoints";
 
+/* Utilidades */
+import { formatDate } from "@/utils/formatDate";
+
 /* Imágenes */
 import Image from "next/image";
 
@@ -57,11 +60,7 @@ export default async function MovieDetails({
             {movie.release_date && (
               <p>
                 <strong>Fecha de estreno:</strong>{" "}
-                {new Date(movie.release_date).toLocaleDateString("es-ES", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
+                {formatDate(movie.release_date)}
               </p>
             )}
 

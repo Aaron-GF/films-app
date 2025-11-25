@@ -11,10 +11,8 @@ type DetailsEndPoint = "credits" | "videos" | "similar";
 export const getMovies = {
   list: (type: MovieListType) => fetchData(`movie/${type}`),
   details: (id: number | string) => fetchData(`movie/${id}`), // Detalles en general de una película
-  detailsEndpoint: (
-    id: number | string,
-    endpoint: DetailsEndPoint
-  ) => fetchData(`movie/${id}/${endpoint}`), // Detalle en específico de una película
+  detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
+    fetchData(`movie/${id}/${endpoint}`), // Detalle en específico de una película
 };
 
 /* ==================================
@@ -23,10 +21,10 @@ export const getMovies = {
 export const getSeries = {
   list: (type: SeriesListType) => fetchData(`tv/${type}`),
   details: (id: number | string) => fetchData(`tv/${id}`), // Detalles en general de una serie
-  detailsEndpoint: (
-    id: number | string,
-    endpoint: DetailsEndPoint
-  ) => fetchData(`tv/${id}/${endpoint}`), // Detalle en específico de una serie
+  detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
+    fetchData(`tv/${id}/${endpoint}`), // Detalle en específico de una serie
+  season: (seriesId: number | string, seasonNumber: number) =>
+    fetchData(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
 };
 
 /* ==================================

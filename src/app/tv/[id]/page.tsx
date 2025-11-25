@@ -3,6 +3,8 @@ import { getSeries } from "@/lib/endpoints";
 import Image from "next/image";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
+import { formatDate } from "@/utils/formatDate";
+import SeasonInfo from "@/components/SeasonInfo/SeasonInfo";
 
 export default async function SeriesDetails({
   params,
@@ -49,14 +51,10 @@ export default async function SeriesDetails({
           <div className="md:w-2/3 space-y-4 text-lg leading-relaxed">
             <p>{series.overview}</p>
 
-            {series.release_date && (
+            {series.first_air_date && (
               <p>
                 <strong>Fecha de estreno:</strong>{" "}
-                {new Date(series.release_date).toLocaleDateString("es-ES", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
+                {formatDate(series.first_air_date)}
               </p>
             )}
 
@@ -78,6 +76,9 @@ export default async function SeriesDetails({
           </div>
         </div>
         <TrailerPlayer videos={videos?.results ?? []} />
+        {series.seasons && series.seasons.length > 0 && (
+          <SeasonInfo seriesId={series.id} seasons={series.seasons} />
+        )}
       </div>
       <MediaCredits cast={credits?.cast ?? []} />
     </main>

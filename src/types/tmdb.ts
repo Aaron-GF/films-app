@@ -17,6 +17,28 @@ export interface Movie {
   genres?: Genre[];
 }
 
+export interface Episode {
+  id: number;
+  name: string;
+  overview: string;
+  air_date: string;
+  episode_number: number;
+  still_path: string | null;
+  vote_average: number;
+  runtime?: number;
+}
+
+export interface Season {
+  id: number;
+  name: string;
+  overview: string;
+  air_date: string;
+  episode_count: number;
+  season_number: number;
+  poster_path: string | null;
+  episodes?: Episode[];
+}
+
 export interface TVShow {
   id: number;
   name: string;
@@ -24,10 +46,12 @@ export interface TVShow {
   poster_path: string | null;
   backdrop_path: string | null;
   first_air_date: string;
+  release_date?: string; // Used in some contexts, maps to first_air_date
   vote_average: number;
   number_of_seasons?: number;
   number_of_episodes?: number;
   genres?: Genre[];
+  seasons?: Season[];
 }
 
 export interface CastMember {
