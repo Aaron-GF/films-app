@@ -2,6 +2,7 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
+import WatchProvidersInfo from "@/components/WatchProvidersInfo/WatchProvidersInfo";
 
 /* Endpoints */
 import { getMovies } from "@/lib/endpoints";
@@ -21,6 +22,7 @@ export default async function MovieDetails({
   const movie = await getMovies.details(id);
   const credits = await getMovies.detailsEndpoint(id, "credits");
   const videos = await getMovies.detailsEndpoint(id, "videos");
+  const watchProviders = await getMovies.watchProviders(id);
 
   return (
     <main className="min-h-screen mt-20">
@@ -31,7 +33,7 @@ export default async function MovieDetails({
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={`${movie.title} fondo`}
             fill
-            className="object-cover object-center opacity-25"
+            className="object-cover object-center opacity-15"
             priority
           />
         </div>
@@ -102,6 +104,7 @@ export default async function MovieDetails({
         </div>
         <TrailerPlayer videos={videos?.results ?? []} />
       </div>
+      <WatchProvidersInfo watchProviders={watchProviders} />
       <MediaCredits cast={credits?.cast ?? []} crew={credits?.crew} />
     </main>
   );

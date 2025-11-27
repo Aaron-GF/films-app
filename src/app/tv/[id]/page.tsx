@@ -5,6 +5,7 @@ import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
 import { formatDate } from "@/utils/formatDate";
 import SeasonInfo from "@/components/SeasonInfo/SeasonInfo";
+import WatchProvidersInfo from "@/components/WatchProvidersInfo/WatchProvidersInfo";
 
 export default async function SeriesDetails({
   params,
@@ -15,6 +16,7 @@ export default async function SeriesDetails({
   const series = await getSeries.details(id);
   const credits = await getSeries.detailsEndpoint(id, "credits");
   const videos = await getSeries.detailsEndpoint(id, "videos");
+  const watchProviders = await getSeries.watchProviders(id);
 
   return (
     <main className="min-h-screen mt-20">
@@ -25,7 +27,7 @@ export default async function SeriesDetails({
             src={`https://image.tmdb.org/t/p/original${series.backdrop_path}`}
             alt={`${series.name} fondo`}
             fill
-            className="object-cover object-center opacity-25"
+            className="object-cover object-center opacity-15"
             priority
           />
         </div>
@@ -76,6 +78,7 @@ export default async function SeriesDetails({
           </div>
         </div>
         <TrailerPlayer videos={videos?.results ?? []} />
+        <WatchProvidersInfo watchProviders={watchProviders} />
         {series.seasons && series.seasons.length > 0 && (
           <SeasonInfo seriesId={series.id} seasons={series.seasons} />
         )}

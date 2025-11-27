@@ -63,9 +63,6 @@ export default function Navbar() {
         <button className="text-yellow-dark hover:text-yellow-light transition-colors">
           Series
         </button>
-        <button className="text-yellow-dark hover:text-yellow-light transition-colors">
-          Categorias
-        </button>
       </div>
       <Searchbar onSearch={handleSearch} value={selectedValue} />
 
