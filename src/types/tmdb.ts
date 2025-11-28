@@ -82,6 +82,7 @@ export interface Video {
   site: string;
   type: string;
   official: boolean;
+  published_at: string;
 }
 
 export interface VideosResponse {

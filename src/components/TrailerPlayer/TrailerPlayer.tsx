@@ -13,8 +13,19 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
 
   const handlePlayTrailer = () => {
     if (videos && videos.length > 0) {
-      setTrailer(videos[0].key);
-      setIsMiniPlayer(false);
+      // Filtra solo los trailers y los ordena por fecha de publicación más reciente
+      const trailers = videos
+        .filter((video) => video.type === "Trailer")
+        .sort((a, b) => {
+          const dateA = new Date(a.published_at).getTime();
+          const dateB = new Date(b.published_at).getTime();
+          return dateB - dateA; // Orden descendente (más reciente primero)
+        });
+
+      if (trailers.length > 0) {
+        setTrailer(trailers[0].key);
+        setIsMiniPlayer(false);
+      }
     }
   };
 

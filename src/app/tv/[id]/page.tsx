@@ -4,8 +4,8 @@ import Image from "next/image";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
 import { formatDate } from "@/utils/formatDate";
-import SeasonInfo from "@/components/SeasonInfo/SeasonInfo";
-import WatchProvidersInfo from "@/components/WatchProvidersInfo/WatchProvidersInfo";
+import SeasonInfo from "@/components/Seasons/SeasonInfo";
+import WatchProvidersInfo from "@/components/WatchProviders/WatchProvidersInfo";
 
 export default async function SeriesDetails({
   params,
@@ -33,13 +33,13 @@ export default async function SeriesDetails({
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto p-6 z-10">
+      <article className="max-w-6xl mx-auto p-6 z-10">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
           {series.name}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-1/5 rounded overflow-hidden shadow-lg">
+          <figure className="w-1/5 rounded overflow-hidden shadow-lg">
             <Image
               src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
               alt={series.name || "Poster de la serie"}
@@ -48,7 +48,7 @@ export default async function SeriesDetails({
               className="object-contain rounded"
               priority
             />
-          </div>
+          </figure>
 
           <div className="md:w-2/3 space-y-4 text-lg leading-relaxed">
             <p>{series.overview}</p>
@@ -63,9 +63,7 @@ export default async function SeriesDetails({
             {series.vote_average !== undefined && (
               <div>
                 <strong>Valoración:</strong>
-                <div className="mt-2">
-                  <StarRating rating={series.vote_average} />
-                </div>
+                <StarRating rating={series.vote_average} className="mt-2" />
               </div>
             )}
 
@@ -82,7 +80,7 @@ export default async function SeriesDetails({
         {series.seasons && series.seasons.length > 0 && (
           <SeasonInfo seriesId={series.id} seasons={series.seasons} />
         )}
-      </div>
+      </article>
       <MediaCredits cast={credits?.cast ?? []} />
     </main>
   );

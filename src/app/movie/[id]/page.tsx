@@ -2,7 +2,7 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
-import WatchProvidersInfo from "@/components/WatchProvidersInfo/WatchProvidersInfo";
+import WatchProvidersInfo from "@/components/WatchProviders/WatchProvidersInfo";
 
 /* Endpoints */
 import { getMovies } from "@/lib/endpoints";
@@ -39,13 +39,13 @@ export default async function MovieDetails({
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto p-6 z-10">
+      <article className="max-w-6xl mx-auto p-6 z-10">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
           {movie.title}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-1/5 shadow-lg">
+          <figure className="w-60 shadow-lg">
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title || "Poster de la película"}
@@ -54,7 +54,7 @@ export default async function MovieDetails({
               className="object-contain rounded"
               priority
             />
-          </div>
+          </figure>
 
           <div className="md:w-2/3 space-y-4 text-lg leading-relaxed">
             <p>{movie.overview}</p>
@@ -67,10 +67,10 @@ export default async function MovieDetails({
             )}
 
             {!!movie.vote_average && (
-              <>
+              <div>
                 <strong>Valoración:</strong>
-                <StarRating rating={movie.vote_average} />
-              </>
+                <StarRating rating={movie.vote_average} className="mt-2" />
+              </div>
             )}
 
             {movie.genres?.length > 0 && (
@@ -103,7 +103,7 @@ export default async function MovieDetails({
           </div>
         </div>
         <TrailerPlayer videos={videos?.results ?? []} />
-      </div>
+      </article>
       <WatchProvidersInfo watchProviders={watchProviders} />
       <MediaCredits cast={credits?.cast ?? []} crew={credits?.crew} />
     </main>

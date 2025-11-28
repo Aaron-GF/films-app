@@ -50,9 +50,9 @@ export default function MediaCredits({ cast, crew }: MediaCreditsProps) {
               <Image
                 src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
                 alt={actor.name}
-                className="object-cover rounded-full mb-2 transition-transform hover:scale-140 hover:rounded hover:mask-b-from-70%"
                 width={90}
                 height={90}
+                className="size-auto object-cover rounded-full mb-2 transition-transform hover:scale-140 hover:rounded hover:mask-b-from-70%"
               />
             )}
             <span className="font-medium z-10 mt-auto">{actor.name}</span>

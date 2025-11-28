@@ -1,13 +1,17 @@
 interface StarRatingProps {
   rating: number;
+  className?: string;
 }
 
-export default function StarRating({ rating }: StarRatingProps) {
+export default function StarRating({
+  rating,
+  className = "",
+}: StarRatingProps) {
   const maxStars = 5;
   const normalizedRating = (rating / 10) * maxStars; // Convierte la valoración de 0-10 a 0-5
 
   return (
-    <div className="flex items-center">
+    <div className={`flex items-center ${className}`}>
       {Array.from({ length: maxStars }, (_, index) => {
         const fillPercentage = Math.min(
           Math.max((normalizedRating - index) * 100, 0),
