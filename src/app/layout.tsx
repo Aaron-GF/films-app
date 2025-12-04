@@ -1,32 +1,37 @@
-import { Inter, Roboto_Mono } from 'next/font/google'
-import "@/styles/globals.css";  
+import { Inter, Roboto_Mono } from "next/font/google";
+import "@/styles/globals.css";
 
-import Navbar from '@/components/Navbar/Navbar'
-import Footer from '@/components/Footer/Footer'
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
- 
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  display: "swap",
+});
 
 export const metadata = {
-  title: "Filmix",
+  title: {
+    default: "Filmix",
+    template: "%s - Filmix",
+  },
   description: "Aplicación para buscar películas",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="es">
-      <body
-        className={`${inter.variable} ${roboto_mono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${roboto_mono.variable} antialiased`}>
         <Navbar />
         {children}
         <Footer />

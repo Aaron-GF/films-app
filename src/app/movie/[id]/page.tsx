@@ -9,9 +9,19 @@ import { getMovies } from "@/lib/endpoints";
 
 /* Utilidades */
 import { formatDate } from "@/utils/formatDate";
+import { generateMediaMetadata } from "@/utils/generateMediaMetadata";
 
 /* Imágenes */
 import Image from "next/image";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  return generateMediaMetadata(id, getMovies.details, "title");
+}
 
 export default async function MovieDetails({
   params,

@@ -6,6 +6,16 @@ import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
 import { formatDate } from "@/utils/formatDate";
 import SeasonInfo from "@/components/Seasons/SeasonInfo";
 import WatchProvidersInfo from "@/components/WatchProviders/WatchProvidersInfo";
+import { generateMediaMetadata } from "@/utils/generateMediaMetadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  return generateMediaMetadata(id, getSeries.details, "name");
+}
 
 export default async function SeriesDetails({
   params,
