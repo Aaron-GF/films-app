@@ -110,7 +110,7 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
               <div className="border-t border-light/10 p-6 bg-dark/40">
                 {isLoading ? (
                   <div className="flex items-center justify-center py-8">
-                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-yellow-dark border-t-transparent" />
+                    <div className="animate-spin rounded-full size-12 border-4 border-yellow-dark border-t-transparent" />
                   </div>
                 ) : episodes?.length ? (
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

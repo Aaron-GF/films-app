@@ -54,7 +54,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Slides */}
-      <div className="relative w-full h-full">
+      <div className="relative size-full">
         {media.map((mediaItem, index) => {
           const href =
             mediaItem.media_type === "movie"

@@ -43,9 +43,19 @@ a {
   @apply cursor-pointer active:scale-97 transition-transform;
 }
 
-/* oculta la barra de desplazamiento */
+/* modifica la barra de desplazamiento */
 ::-webkit-scrollbar {
-  display: none;
+  height: 0;
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--yellow-dark);
+  border-radius: 5rem;
 }
 
 /* modifica el boton de borrar por defecto de la barra de busqueda */

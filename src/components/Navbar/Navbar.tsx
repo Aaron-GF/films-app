@@ -66,7 +66,7 @@ export default function Navbar() {
           aria-expanded={isMobileMenuOpen}
         >
           <svg
-            className={`w-5 h-5 transition-transform duration-300 ${
+            className={`size-5 transition-transform duration-300 ${
               isMobileMenuOpen ? "rotate-180" : ""
             }`}
             fill="none"
