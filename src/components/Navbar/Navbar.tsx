@@ -19,8 +19,8 @@ interface SearchResult {
 
 const NAV_LINKS = [
   { name: "Inicio", href: "/" },
-  { name: "Películas", href: "#" },
-  { name: "Series", href: "#" },
+  { name: "Películas", href: "/movies" },
+  { name: "Series", href: "/series" },
 ];
 
 export default function Navbar() {
