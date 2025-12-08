@@ -14,6 +14,8 @@ Una aplicación web que permite explorar películas y series de televisión, con
 - Implementar una aplicación completa y funcional
 - Mostrar buenas prácticas de desarrollo y arquitectura de código
 - Crear una experiencia de usuario fluida y atractiva
+- Desarrollar una aplicación optimizada con alto rendimiento
+- Proporcionar información completa y útil al usuario (tráilers, plataformas de streaming, reparto, etc.)
 
 ## ✨ Características
 
@@ -22,7 +24,7 @@ Una aplicación web que permite explorar películas y series de televisión, con
 - 📺 **Información detallada**: Visualiza detalles completos incluyendo sinopsis, reparto, calificaciones y tráilers
 - ⭐ **Sistema de valoraciones**: Visualización de calificaciones con estrellas dinámicas
 - 🎬 **Reproductor de tráilers**: Integración con YouTube para ver tráilers directamente
-- 📱 **Proveedores de streaming**: Información sobre dónde ver el contenido (Netflix, Prime Video, etc.)
+- 📱 **Proveedores de streaming**: Información sobre dónde ver el contenido 
 - 🎭 **Información de temporadas**: Detalles completos de temporadas y episodios para series
 - 🎨 **Diseño responsive**: Interfaz adaptable a todos los dispositivos
 
@@ -192,19 +194,6 @@ La aplicación utiliza la API v3 de TMDB con las siguientes características:
   - `/search/multi` - Búsqueda multi-tipo
   - `/genre/*` - Listados de géneros
 
-## 🎨 Personalización
-
-### Fuentes
-
-El proyecto utiliza Google Fonts:
-
-- **Inter**: Fuente principal
-- **Roboto Mono**: Fuente monoespaciada
-
-### Colores y Temas
-
-Los estilos están definidos en `src/styles/globals.css` usando variables CSS de Tailwind.
-
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Por favor:
@@ -246,12 +235,6 @@ Si estás interesado en usar este proyecto con fines comerciales, por favor cont
 ---
 
 **Copyright © 2025 Aaron García. Todos los derechos reservados bajo CC BY-NC-SA 4.0.**
-
-## 🙏 Agradecimientos
-
-- [The Movie Database (TMDB)](https://www.themoviedb.org/)
-- [Next.js](https://nextjs.org/)
-- [Vercel](https://vercel.com/)
 
 ## 📧 Contacto
 
