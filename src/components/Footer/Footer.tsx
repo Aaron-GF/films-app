@@ -66,7 +66,18 @@ export default function Footer() {
 
         {/* Pie de página */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-yellow-dark/30">
-          <p className="text-light/50 text-sm">Filmix © {currentYear}</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+            <p className="text-light/50 text-sm">Filmix © {currentYear}</p>
+            <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-light/50 hover:text-yellow-dark transition-colors text-xs"
+              title="Licencia Creative Commons BY-NC-SA 4.0"
+            >
+              CC BY-NC-SA 4.0
+            </a>
+          </div>
           <p className="text-light/50 text-sm">
             Hecho por{" "}
             <span className="text-yellow-dark font-semibold">Aaron GF</span>
