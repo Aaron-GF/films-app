@@ -228,10 +228,6 @@ Este proyecto está licenciado bajo [Creative Commons Attribution-NonCommercial-
 - Usar en servicios de pago sin permiso
 - Integrar en aplicaciones empresariales comerciales
 
-### 💼 Licencia Comercial
-
-Si estás interesado en usar este proyecto con fines comerciales, por favor contacta para discutir opciones de licencia comercial.
-
 ---
 
 **Copyright © 2025 Aaron García. Todos los derechos reservados bajo CC BY-NC-SA 4.0.**

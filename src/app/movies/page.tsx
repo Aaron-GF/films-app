@@ -82,9 +82,10 @@ export default function MoviesPage() {
         genres={genres}
         selectedCategory={selectedCategory}
         selectedGenre={selectedGenre}
-        onCategoryChange={(category) =>
-          setSelectedCategory(category as MovieCategory)
-        }
+        onCategoryChange={(category) => {
+          setSelectedCategory(category as MovieCategory);
+          setSelectedGenre(null); // Reset genre filter when changing category
+        }}
         onGenreChange={setSelectedGenre}
       />
 

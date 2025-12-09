@@ -48,16 +48,13 @@ export default function FilterBar({
             onClick={() => setShowGenres(!showGenres)}
             className="px-4 py-2 rounded-lg font-medium bg-dark/50 text-light hover:bg-yellow-dark/20 hover:text-yellow-light transition-all flex items-center gap-2"
           >
-            <span>
-              {selectedGenre
-                ? genres.find((g) => g.id === selectedGenre)?.name
-                : "Todos los géneros"}
-            </span>
+            {selectedGenre
+              ? genres.find((g) => g.id === selectedGenre)?.name
+              : "Todos los géneros"}
             <svg
               className={`size-4 transition-transform ${
                 showGenres ? "rotate-180" : ""
               }`}
-              fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >

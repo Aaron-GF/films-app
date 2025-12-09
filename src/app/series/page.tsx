@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getSeries, getGenres, getDiscover } from "@/lib/endpoints";
+import { translateGenres } from "@/lib/genreTranslations";
 import FilterBar from "@/components/Filters/FilterBar";
 import MediaGrid from "@/components/Media/MediaGrid";
 import type { TVShow, Genre } from "@/types/tmdb";
@@ -35,7 +36,8 @@ export default function SeriesPage() {
     const loadGenres = async () => {
       try {
         const data = await getGenres.tv();
-        setGenres(data.genres || []);
+        const translatedGenres = translateGenres(data.genres || []);
+        setGenres(translatedGenres);
       } catch (error) {
         console.error("Error loading genres:", error);
       }
@@ -82,9 +84,10 @@ export default function SeriesPage() {
         genres={genres}
         selectedCategory={selectedCategory}
         selectedGenre={selectedGenre}
-        onCategoryChange={(category) =>
-          setSelectedCategory(category as SeriesCategory)
-        }
+        onCategoryChange={(category) => {
+          setSelectedCategory(category as SeriesCategory);
+          setSelectedGenre(null); // Reset genre filter when changing category
+        }}
         onGenreChange={setSelectedGenre}
       />
 

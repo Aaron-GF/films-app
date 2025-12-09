@@ -1,5 +1,6 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
 import { getSeries } from "@/lib/endpoints";
+import { translateGenres } from "@/lib/genreTranslations";
 import Image from "next/image";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
@@ -80,7 +81,9 @@ export default async function SeriesDetails({
             {series.genres?.length > 0 && (
               <p>
                 <strong>Géneros:</strong>{" "}
-                {series.genres.map((g) => g.name).join(", ")}
+                {translateGenres(series.genres)
+                  .map((g) => g.name)
+                  .join(", ")}
               </p>
             )}
           </div>
