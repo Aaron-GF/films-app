@@ -12,7 +12,7 @@ type SeriesCategory = "popular" | "top_rated" | "airing_today" | "on_the_air";
 const CATEGORIES = [
   { value: "popular", label: "Popular" },
   { value: "top_rated", label: "Mejor valoradas" },
-  { value: "airing_today", label: "Al aire hoy" },
+  { value: "airing_today", label: "Estrenos de hoy" },
   { value: "on_the_air", label: "En emisión" },
 ];
 

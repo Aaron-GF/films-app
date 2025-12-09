@@ -10,9 +10,9 @@ type DetailsEndPoint = "credits" | "videos" | "similar";
 ================================== */
 export const getMovies = {
   list: (type: MovieListType) => fetchData(`movie/${type}`),
-  details: (id: number | string) => fetchData(`movie/${id}`), // Detalles en general de una película
+  details: (id: number | string) => fetchData(`movie/${id}`), // Detalles en general
   detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
-    fetchData(`movie/${id}/${endpoint}`), // Detalle en específico de una película
+    fetchData(`movie/${id}/${endpoint}`), // Detalle en específico
   watchProviders: (id: number | string) =>
     fetchData(`movie/${id}/watch/providers`), // Proveedores de streaming
 };
@@ -22,9 +22,9 @@ export const getMovies = {
 ================================== */
 export const getSeries = {
   list: (type: SeriesListType) => fetchData(`tv/${type}`),
-  details: (id: number | string) => fetchData(`tv/${id}`), // Detalles en general de una serie
+  details: (id: number | string) => fetchData(`tv/${id}`), // Detalles en general
   detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
-    fetchData(`tv/${id}/${endpoint}`), // Detalle en específico de una serie
+    fetchData(`tv/${id}/${endpoint}`), // Detalle en específico
   season: (seriesId: number | string, seasonNumber: number) =>
     fetchData(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
   watchProviders: (id: number | string) =>
@@ -44,6 +44,12 @@ export const getGenres = {
 ================================== */
 export const searchMulti = (query: string) =>
   fetchData(`search/multi?query=${encodeURIComponent(query)}`);
+
+export const searchCollection = (query: string) =>
+  fetchData(`search/collection?query=${encodeURIComponent(query)}`); 
+
+export const getCollection = (id: number | string) =>
+  fetchData(`collection/${id}`); // Detalles de una colección
 
 export const getTrending = (
   mediaType: MediaType | "all",

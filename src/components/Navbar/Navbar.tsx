@@ -6,13 +6,14 @@ import Link from "next/link";
 import Searchbar from "@/components/Navbar/Searchbar";
 import SearchDropdown from "@/components/Navbar/SearchDropdown";
 import { searchMulti } from "@/lib/endpoints";
+import { searchCollection } from "@/lib/endpoints";
 import { getYear } from "@/utils/getYear";
 
 interface SearchResult {
   id: number;
   title?: string;
   name?: string;
-  media_type: "movie" | "tv";
+  media_type: "movie" | "tv" | "collection";
   release_date?: string;
   first_air_date?: string;
 }
@@ -30,18 +31,39 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSearch = async (query: string) => {
-    const res = await searchMulti(query);
-    const filteredResults = Array.isArray(res.results)
-      ? res.results
+    // Buscar en películas/series y colecciones en paralelo
+    const [multiRes, collectionRes] = await Promise.all([
+      searchMulti(query),
+      searchCollection(query),
+    ]);
+
+    // Filtrar y formatear resultados de películas/series
+    const mediaResults = Array.isArray(multiRes.results)
+      ? multiRes.results
           .filter(
             (item: any) =>
               item.media_type === "movie" || item.media_type === "tv"
           )
-          .slice(0, 6)
-          .sort((a: SearchResult, b: SearchResult) => getYear(b) - getYear(a))
+          .slice(0, 4) // Limitar a 4 resultados de media
       : [];
-    setSearchResults(filteredResults);
-    setShowDropdown(filteredResults.length > 0);
+
+    // Formatear resultados de colecciones
+    const collectionResults = Array.isArray(collectionRes.results)
+      ? collectionRes.results
+          .map((item: any) => ({
+            ...item,
+            media_type: "collection" as const,
+          }))
+          .slice(0, 2) // Limitar a 2 colecciones
+      : [];
+
+    // Combinar y ordenar todos los resultados
+    const allResults = [...mediaResults, ...collectionResults]
+      .sort((a: SearchResult, b: SearchResult) => getYear(b) - getYear(a))
+      .slice(0, 6); // Máximo 6 resultados totales
+
+    setSearchResults(allResults);
+    setShowDropdown(allResults.length > 0);
   };
 
   const handleSelect = (value: SearchResult) => {
