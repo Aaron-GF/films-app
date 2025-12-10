@@ -1,6 +1,6 @@
 import MediaCredits from "@/components/Credits/MediaCredits";
 import { getSeries } from "@/lib/endpoints";
-import { translateGenres } from "@/lib/genreTranslations";
+import { translateGenres } from "@/utils/genreTranslations";
 import Image from "next/image";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";

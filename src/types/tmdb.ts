@@ -93,7 +93,7 @@ export interface SearchResult {
   id: number;
   title?: string;
   name?: string;
-  media_type: "movie" | "tv" | "person";
+  media_type: "movie" | "tv" | "collection";
   release_date?: string;
   first_air_date?: string;
   poster_path?: string | null;

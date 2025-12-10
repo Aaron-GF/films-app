@@ -7,8 +7,9 @@ import { getCollection } from "@/lib/endpoints";
 /* Imagenes */
 import Image from "next/image"; 
 
-/* Metadata */
+/* Utilidades */
 import { generateMediaMetadata } from "@/utils/generateMediaMetadata";
+import { cleanCollectionName } from "@/utils/cleanCollectionName";
 
 /* Tipos */
 import type { Collection } from "@/types/tmdb";
@@ -47,7 +48,7 @@ export default async function CollectionDetails({
 
       <article className="max-w-6xl mx-auto p-6 z-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg text-yellow-dark">
-          {collection.name}
+          {cleanCollectionName(collection.name, "collection")}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8 mb-12">

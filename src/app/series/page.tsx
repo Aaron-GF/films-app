@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getSeries, getGenres, getDiscover } from "@/lib/endpoints";
-import { translateGenres } from "@/lib/genreTranslations";
+import { translateGenres } from "@/utils/genreTranslations";
 import FilterBar from "@/components/Filters/FilterBar";
 import MediaGrid from "@/components/Media/MediaGrid";
 import type { TVShow, Genre } from "@/types/tmdb";

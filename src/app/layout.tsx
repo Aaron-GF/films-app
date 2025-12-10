@@ -19,7 +19,7 @@ const roboto_mono = Roboto_Mono({
 export const metadata = {
   title: {
     default: "Filmix",
-    template: "%s - Filmix",
+    template: "%s | Filmix",
   },
   description: "Aplicación para buscar películas",
 };

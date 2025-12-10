@@ -1,14 +1,11 @@
 import Link from "next/link";
-import { getYear } from "@/utils/getYear";
 
-interface SearchResult {
-  id: number;
-  title?: string;
-  name?: string;
-  media_type: "movie" | "tv" | "collection";
-  release_date?: string;
-  first_air_date?: string;
-}
+/* Utilidades */
+import { getYear } from "@/utils/getYear";
+import { cleanCollectionName } from "@/utils/cleanCollectionName";
+
+/* Tipos */
+import type { SearchResult } from "@/types/tmdb";
 
 interface SearchDropdownProps {
   results: SearchResult[];
@@ -31,21 +28,6 @@ export default function SearchDropdown({
     if (mediaType === "movie") return "Película";
     if (mediaType === "tv") return "Serie";
     return "Colección";
-  };
-
-  const cleanCollectionName = (
-    name: string,
-    mediaType: SearchResult["media_type"]
-  ) => {
-    if (mediaType !== "collection") return name;
-
-    // Remueve sufijos redundantes como "- Collection", "Collection", "- Colección", "Colección"
-    return name
-      .replace(/\s*[-–—]\s*Collection$/i, "")
-      .replace(/\s+Collection$/i, "")
-      .replace(/\s*[-–—]\s*Colección$/i, "")
-      .replace(/\s+Colección$/i, "")
-      .trim();
   };
 
   return (
