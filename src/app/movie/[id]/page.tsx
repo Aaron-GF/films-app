@@ -1,4 +1,5 @@
 /* Componentes */
+import Link from "next/link";
 import MediaCredits from "@/components/Credits/MediaCredits";
 import StarRating from "@/components/Ratings/StarRating";
 import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
@@ -96,23 +97,49 @@ export default async function MovieDetails({
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="20"
-                  viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
                 >
-                  <line x1="10" x2="14" y1="2" y2="2" />
-                  <line x1="12" x2="15" y1="14" y2="11" />
+                  <path d="M10 2h4m-2 12 3-3" />
                   <circle cx="12" cy="14" r="8" />
                 </svg>
                 {movie.runtime} min
               </span>
             )}
+
+            <div className="flex flex-wrap gap-4 mt-6">
+              <TrailerPlayer videos={videos?.results ?? []} className="ml-0!" />
+
+              {movie.belongs_to_collection && (
+                <Link
+                  href={`/collections/${movie.belongs_to_collection.id}`}
+                  className="flex items-center gap-2 px-4 py-2 bg-yellow-dark text-dark hover:bg-yellow-dark/10 hover:text-yellow-dark hover:outline-yellow-dark hover:outline rounded-md font-semibold transition-all duration-normal"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+                    <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+                    <path d="M6 6h.01M6 18h.01" />
+                  </svg>
+                  Ver colección
+                </Link>
+              )}
+            </div>
           </div>
         </div>
-        <TrailerPlayer videos={videos?.results ?? []} />
       </article>
       <WatchProvidersInfo watchProviders={watchProviders} />
       <MediaCredits cast={credits?.cast ?? []} crew={credits?.crew} />

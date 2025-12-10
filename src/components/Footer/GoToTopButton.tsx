@@ -5,7 +5,7 @@ export default function GoToTopButton() {
     <div className="flex items-center gap-2 ml-auto mt-auto">
       <span className="text-light/70 text-sm">Volver al inicio</span>
       <button
-        className="flex items-center justify-center size-10 rounded-full text-yellow-dark bg-yellow-dark/10 transition-all duration-medium hover:scale-105 hover:bg-yellow-dark hover:text-dark"
+        className="flex items-center justify-center size-10 rounded-full text-yellow-dark bg-yellow-dark/10 transition-all duration-normal hover:scale-105 hover:bg-yellow-dark hover:text-dark"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         title="Volver al inicio"
         aria-label="Volver al inicio"

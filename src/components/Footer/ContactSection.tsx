@@ -50,7 +50,7 @@ export default function ContactSection() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center size-10 rounded-full bg-yellow-dark/10 transition-all duration-medium hover:scale-105 hover:bg-yellow-dark group"
+                className="flex items-center justify-center size-10 rounded-full bg-yellow-dark/10 transition-all duration-normal hover:scale-105 hover:bg-yellow-dark group"
                 aria-label={link.social}
                 title={link.social}
               >

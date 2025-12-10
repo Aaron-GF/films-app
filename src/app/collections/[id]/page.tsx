@@ -5,7 +5,7 @@ import MediaGrid from "@/components/Media/MediaGrid";
 import { getCollection } from "@/lib/endpoints";
 
 /* Imagenes */
-import Image from "next/image"; 
+import Image from "next/image";
 
 /* Utilidades */
 import { generateMediaMetadata } from "@/utils/generateMediaMetadata";
@@ -30,6 +30,15 @@ export default async function CollectionDetails({
 }) {
   const { id } = await params;
   const collection: Collection = await getCollection(id);
+
+  // Ordenar películas por fecha de estreno
+  if (collection.parts) {
+    collection.parts.sort((a, b) => {
+      const dateA = a.release_date ? new Date(a.release_date).getTime() : 0;
+      const dateB = b.release_date ? new Date(b.release_date).getTime() : 0;
+      return dateA - dateB;
+    });
+  }
 
   return (
     <main className="min-h-screen mt-20">
@@ -68,12 +77,6 @@ export default async function CollectionDetails({
           <div className="md:w-3/4 space-y-4 text-lg leading-relaxed">
             <h2 className="text-2xl font-semibold mb-2">Descripción</h2>
             <p className="text-light/90">{collection.overview}</p>
-
-            <div className="pt-4">
-              <p className="text-xl font-semibold text-yellow-light">
-                {collection.parts.length} Películas en la colección
-              </p>
-            </div>
           </div>
         </div>
 

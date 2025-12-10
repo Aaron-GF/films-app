@@ -7,7 +7,10 @@ interface TrailerPlayerProps {
   videos: Video[];
 }
 
-export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
+export default function TrailerPlayer({
+  videos,
+  className = "",
+}: TrailerPlayerProps & { className?: string }) {
   const [trailer, setTrailer] = useState<string | null>(null);
   const [isMiniPlayer, setIsMiniPlayer] = useState(false);
 
@@ -57,11 +60,11 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
   }, [trailer]);
 
   return (
-    <section>
+    <>
       {videos && videos.length > 0 && (
         <button
           onClick={handlePlayTrailer}
-          className="flex items-center gap-2 px-4 py-2 bg-yellow-dark hover:bg-yellow-dark/80 rounded-lg font-semibold transition-colors text-dark ml-auto"
+          className={`flex items-center gap-2 px-4 py-2 bg-yellow-dark text-dark hover:bg-yellow-dark/10 hover:text-yellow-dark hover:outline-yellow-dark hover:outline rounded-md font-semibold transition-all duration-normal ${className}`}
           aria-label="Reproducir tráiler"
         >
           <span className="text-xl">▷</span>Ver trailer
@@ -124,6 +127,6 @@ export default function TrailerPlayer({ videos }: TrailerPlayerProps) {
           </div>
         </>
       )}
-    </section>
+    </>
   );
 }

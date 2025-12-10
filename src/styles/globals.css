@@ -40,7 +40,7 @@ body {
 
 button,
 a {
-  @apply cursor-pointer active:scale-97 transition-transform;
+  @apply cursor-pointer active:scale-97;
 }
 
 /* modifica la barra de desplazamiento */
