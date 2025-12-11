@@ -13,9 +13,10 @@ interface MediaItem {
 
 interface MediaCarouselProps {
   media: MediaItem[];
+  category?: "movie" | "tv" | "collection";
 }
 
-export default function MediaCarousel({ media }: MediaCarouselProps) {
+export default function MediaCarousel({ media, category }: MediaCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 6;
 
@@ -60,9 +61,16 @@ export default function MediaCarousel({ media }: MediaCarouselProps) {
           }}
         >
           {media.map((mediaItem) => {
-            const href = mediaItem.title
-              ? `/movie/${mediaItem.id}`
-              : `/tv/${mediaItem.id}`;
+            let href = "";
+            if (category) {
+              href = `/${
+                category === "collection" ? "collections" : category
+              }/${mediaItem.id}`;
+            } else {
+              href = mediaItem.title
+                ? `/movie/${mediaItem.id}`
+                : `/tv/${mediaItem.id}`;
+            }
             return (
               <div
                 key={mediaItem.id}

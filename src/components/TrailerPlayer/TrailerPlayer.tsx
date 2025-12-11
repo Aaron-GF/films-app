@@ -108,7 +108,7 @@ export default function TrailerPlayer({
             >
               {/* Botón cerrar */}
               <button
-                className="absolute top-1 right-1 size-6 bg-red-500 rounded hover:bg-red-600 transition-colors z-modal text-dark font-bold"
+                className="absolute flex items-center justify-center top-1 right-1 size-6 bg-red-500 rounded hover:bg-red-600 transition-colors z-modal text-dark font-bold"
                 onClick={handleClose}
                 aria-label="Cerrar reproductor"
               >

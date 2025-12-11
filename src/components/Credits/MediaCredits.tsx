@@ -19,22 +19,24 @@ export default function MediaCredits({ cast, crew }: MediaCreditsProps) {
           <h2 className="m-4 text-2xl font-bold text-yellow-dark">
             Dirigida por
           </h2>
-          {directors.map((director) => (
-            <div key={director.id} className="flex flex-col m-2">
-              {director.profile_path ? (
-                <Image
-                  src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
-                  alt={director.name}
-                  width={90}
-                  height={90}
-                  className="w-25 h-40 object-cover rounded-full mb-2 ml-4 transition-transform hover:scale-140 hover:rounded-md hover:mask-b-from-70%"
-                />
-              ) : (
-                <div className="size-24 rounded-full" />
-              )}
-              <span className="font-medium mt-2 z-10">{director.name}</span>
-            </div>
-          ))}
+          <div className="flex flex-wrap gap-12 m-2">
+            {directors.map((director) => (
+              <div key={director.id} className="flex flex-col items-center text-center">
+                {director.profile_path ? (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
+                    alt={director.name}
+                    width={90}
+                    height={90}
+                    className="w-25 h-40 object-cover rounded-full mb-2 ml-4 transition-transform hover:scale-140 hover:rounded-md hover:mask-b-from-70%"
+                  />
+                ) : (
+                  <div className="size-24 rounded-full" />
+                )}
+                <span className="font-medium mt-2 z-10">{director.name}</span>
+              </div>
+            ))}
+          </div>
         </>
       )}
       <h2 className="m-4 text-2xl font-bold text-yellow-dark">

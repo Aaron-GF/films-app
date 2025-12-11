@@ -86,9 +86,11 @@ export default async function SeriesDetails({
                   .join(", ")}
               </p>
             )}
+
+            <TrailerPlayer videos={videos?.results ?? []} />
           </div>
         </div>
-        <TrailerPlayer videos={videos?.results ?? []} />
+        
         <WatchProvidersInfo watchProviders={watchProviders} />
         {series.seasons && series.seasons.length > 0 && (
           <SeasonInfo seriesId={series.id} seasons={series.seasons} />
