@@ -14,7 +14,7 @@ interface ProviderSectionProps {
   providers: WatchProvider[];
 }
 
-// Componente para mostrar un proveedor individual
+// Componente para mostrar proveedor individual
 function ProviderCard({ provider }: ProviderCardProps) {
   return (
     <div
@@ -38,7 +38,7 @@ function ProviderCard({ provider }: ProviderCardProps) {
   );
 }
 
-// Componente para una sección de proveedores (Streaming, Alquiler, Compra)
+// Componente para sección de proveedores (Streaming, Alquiler, Compra)
 function ProviderSection({ title, providers }: ProviderSectionProps) {
   if (!providers || providers.length === 0) {
     return null;
@@ -110,21 +110,8 @@ export default function WatchProvidersInfo({
               className="inline-flex items-center gap-2 text-sm text-yellow-dark transition-colors hover:text-yellow-dark/80"
             >
               Ver más opciones en JustWatch
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" x2="21" y1="14" y2="3" />
-              </svg>
+              {/* prettier-ignore */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/></svg>
             </a>
           </div>
         )}

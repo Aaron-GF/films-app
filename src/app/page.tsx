@@ -19,7 +19,7 @@ export default async function Home() {
   const upcomingMovies = await getMovies.list("upcoming"); // Proximos estrenos de películas
 
   // Colecciones destacadas
-  const collectionIds = [86311, 10, 1241, 119, 645, 10194]; // MCU, Star Wars, Harry Potter, LOTR, James Bond, Toy Story
+  const collectionIds = [86311, 10, 1241, 119, 328, 263]; // Los Vengadores, Star Wars, Harry Potter, El Señor de los Anillos, Jurassic Park, Batman
   const collectionsPromise = collectionIds.map((id) => getCollection(id));
   const collectionsRaw = await Promise.all(collectionsPromise);
   const collections = collectionsRaw
@@ -45,7 +45,7 @@ export default async function Home() {
       <MediaCarousel media={popularSeries.results} />
 
       <section className="py-8">
-        <h2 className="text-3xl font-bold mb-6 text-yellow-500">
+        <h2 className="text-3xl font-bold mb-6 text-yellow-dark">
           Colecciones Legendarias
         </h2>
         <CollectionsGrid collections={collections} />

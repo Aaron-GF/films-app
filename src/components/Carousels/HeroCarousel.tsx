@@ -1,22 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image"; // Optimizado para cargar imágenes
+import Image from "next/image";
 import Link from "next/link";
 import CarouselButton from "@/components/Carousels/CarouselButton";
-
-interface MediaType {
-  id: number;
-  title?: string;
-  name?: string;
-  poster_path: string;
-  backdrop_path?: string;
-  overview?: string;
-  media_type: "movie" | "tv";
-}
+import type { MediaItem } from "@/types/tmdb";
 
 interface HeroCarouselProps {
-  media: MediaType[];
+  media: MediaItem[];
 }
 
 export default function HeroCarousel({ media }: HeroCarouselProps) {

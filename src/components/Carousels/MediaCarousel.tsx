@@ -3,17 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-interface MediaItem {
-  id: number;
-  title?: string;
-  name?: string;
-  poster_path: string;
-}
+import type { MediaItem } from "@/types/tmdb";
 
 interface MediaCarouselProps {
   media: MediaItem[];
-  category?: "movie" | "tv" | "collection";
+  category?: "movie" | "tv";
 }
 
 export default function MediaCarousel({ media, category }: MediaCarouselProps) {
@@ -63,9 +57,7 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
           {media.map((mediaItem) => {
             let href = "";
             if (category) {
-              href = `/${
-                category === "collection" ? "collections" : category
-              }/${mediaItem.id}`;
+              href = `/${category}/${mediaItem.id}`;
             } else {
               href = mediaItem.title
                 ? `/movie/${mediaItem.id}`
@@ -98,18 +90,7 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
           className="absolute right-0 z-content p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
           aria-label="Next slide"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
     </div>

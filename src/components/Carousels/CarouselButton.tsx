@@ -19,19 +19,7 @@ export default function CarouselButton({
       onClick={onClick}
       aria-label={label}
     >
-      <svg
-        className="size-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d={iconPath}
-        />
-      </svg>
+      <svg fill="none" stroke="currentColor" className="size-6" viewBox="0 0 24 24"/>
     </button>
   );
 }

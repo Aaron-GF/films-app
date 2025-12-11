@@ -54,13 +54,7 @@ export default function ContactSection() {
                 aria-label={link.social}
                 title={link.social}
               >
-                <svg
-                  className="size-5 text-yellow-dark group-hover:text-dark transition-colors"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  {ICONS[link.social]}
-                </svg>
+                <svg fill="currentColor" className="size-5 text-yellow-dark group-hover:text-dark transition-colors" viewBox="0 0 24 24">{ICONS[link.social]}</svg>
               </a>
             </li>
           ))}

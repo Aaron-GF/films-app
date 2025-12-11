@@ -1,9 +1,37 @@
 // Tipos para las respuestas de la API de TMDB
 
+/* ==================================
+   Core / Compartido
+================================== */
+
 export interface Genre {
   id: number;
   name: string;
 }
+
+// Interfaz unificada para usar en componentes UI (Carruseles, Grids)
+export interface MediaItem {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  overview?: string;
+  media_type?: "movie" | "tv" | "collection";
+  vote_average?: number;
+}
+
+// Respuesta paginada genérica para listas
+export interface PaginatedResponse<T> {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
+}
+
+/* ==================================
+   Películas
+================================== */
 
 export interface Movie {
   id: number;
@@ -22,6 +50,19 @@ export interface Movie {
     backdrop_path: string | null;
   };
 }
+
+export interface Collection {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  parts: Movie[];
+}
+
+/* ==================================
+   Series / TV
+================================== */
 
 export interface Episode {
   id: number;
@@ -52,13 +93,17 @@ export interface TVShow {
   poster_path: string | null;
   backdrop_path: string | null;
   first_air_date: string;
-  release_date?: string; // Used in some contexts, maps to first_air_date
+  release_date?: string;
   vote_average: number;
   number_of_seasons?: number;
   number_of_episodes?: number;
   genres?: Genre[];
   seasons?: Season[];
 }
+
+/* ==================================
+   Personas / Créditos
+================================== */
 
 export interface CastMember {
   id: number;
@@ -81,19 +126,9 @@ export interface Credits {
   crew: CrewMember[];
 }
 
-export interface Video {
-  id: string;
-  key: string;
-  name: string;
-  site: string;
-  type: string;
-  official: boolean;
-  published_at: string;
-}
-
-export interface VideosResponse {
-  results: Video[];
-}
+/* ==================================
+   Búsqueda / Resultados
+================================== */
 
 export interface SearchResult {
   id: number;
@@ -106,26 +141,23 @@ export interface SearchResult {
   backdrop_path?: string | null;
 }
 
-export interface SearchResponse {
-  page: number;
-  results: SearchResult[];
-  total_pages: number;
-  total_results: number;
+/* ==================================
+   Videos / Assets
+================================== */
+
+export interface Video {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+  published_at: string;
 }
 
-export interface MovieListResponse {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
-}
-
-export interface TVShowListResponse {
-  page: number;
-  results: TVShow[];
-  total_pages: number;
-  total_results: number;
-}
+/* ==================================
+   Plataformas de visualización (Streaming)
+================================== */
 
 export interface WatchProvider {
   logo_path: string;
@@ -146,13 +178,4 @@ export interface WatchProvidersResponse {
   results: {
     [countryCode: string]: WatchProviderData;
   };
-}
-
-export interface Collection {
-  id: number;
-  name: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  parts: Movie[];
 }

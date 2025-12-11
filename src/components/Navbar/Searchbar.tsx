@@ -43,19 +43,7 @@ export default function Searchbar({ value, onSearch }: SearchbarProps) {
         onChange={handleTextChange}
       />
       <button type="submit">
-        <svg
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 115.196 5.196a7.5 7.5 0 0110.607 10.607z"
-          />
-        </svg>
+        <svg fill="none" stroke="currentColor" strokeWidth="1.5" className="size-6" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 1 5.196 5.196a7.5 7.5 0 0 1 10.607 10.607"/></svg>
       </button>
     </form>
   );

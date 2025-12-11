@@ -3,27 +3,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cleanCollectionName } from "@/utils/cleanCollectionName";
-
-interface CollectionItem {
-  id: number;
-  name: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-}
+import type { MediaItem } from "@/types/tmdb";
 
 interface CollectionsGridProps {
-  collections: CollectionItem[];
+  collections: MediaItem[];
 }
 
 export default function CollectionsGrid({ collections }: CollectionsGridProps) {
   return (
     <section>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {collections.map((collection) => (
           <Link
             key={collection.id}
             href={`/collections/${collection.id}`}
-            className="group relative h-48 md:h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-normal transform hover:-translate-y-1"
+            className="group relative h-48 md:h-64 rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-normal transform hover:-translate-y-1"
           >
             {/* Imagen de fondo (Backdrop preferido, fallback a poster zoom) */}
             <div className="absolute inset-0">
