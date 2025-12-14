@@ -1,4 +1,15 @@
 import { fetchData } from "@/lib/fetchData";
+import type {
+  Movie,
+  TVShow,
+  Collection,
+  Genre,
+  PaginatedResponse,
+  SearchResult,
+  Credits,
+  Video,
+  WatchProvidersResponse,
+} from "@/types/tmdb";
 
 type MediaType = "movie" | "tv";
 type MovieListType = "popular" | "top_rated" | "now_playing" | "upcoming";
@@ -9,52 +20,63 @@ type DetailsEndPoint = "credits" | "videos" | "similar";
    Películas
 ================================== */
 export const getMovies = {
-  list: (type: MovieListType) => fetchData(`movie/${type}`),
-  details: (id: number | string) => fetchData(`movie/${id}`), // Detalles en general
-  detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
-    fetchData(`movie/${id}/${endpoint}`), // Detalle en específico
+  list: (type: MovieListType) =>
+    fetchData<PaginatedResponse<Movie>>(`movie/${type}`),
+  details: (id: number | string) => fetchData<Movie>(`movie/${id}`), // Detalles en general
+  detailsEndpoint: <T = any>(id: number | string, endpoint: DetailsEndPoint) =>
+    fetchData<T>(`movie/${id}/${endpoint}`), // Detalle en específico
   watchProviders: (id: number | string) =>
-    fetchData(`movie/${id}/watch/providers`), // Proveedores de streaming
+    fetchData<WatchProvidersResponse>(`movie/${id}/watch/providers`), // Proveedores de streaming
 };
 
 /* ==================================
    Series
 ================================== */
 export const getSeries = {
-  list: (type: SeriesListType) => fetchData(`tv/${type}`),
-  details: (id: number | string) => fetchData(`tv/${id}`), // Detalles en general
-  detailsEndpoint: (id: number | string, endpoint: DetailsEndPoint) =>
-    fetchData(`tv/${id}/${endpoint}`), // Detalle en específico
+  list: (type: SeriesListType) =>
+    fetchData<PaginatedResponse<TVShow>>(`tv/${type}`),
+  details: (id: number | string) => fetchData<TVShow>(`tv/${id}`), // Detalles en general
+  detailsEndpoint: <T = any>(id: number | string, endpoint: DetailsEndPoint) =>
+    fetchData<T>(`tv/${id}/${endpoint}`), // Detalle en específico
   season: (seriesId: number | string, seasonNumber: number) =>
-    fetchData(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
+    fetchData<any>(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
   watchProviders: (id: number | string) =>
-    fetchData(`tv/${id}/watch/providers`), // Proveedores de streaming
+    fetchData<WatchProvidersResponse>(`tv/${id}/watch/providers`), // Proveedores de streaming
 };
 
 /* ==================================
    Géneros
 ================================== */
 export const getGenres = {
-  movies: () => fetchData("genre/movie/list"),
-  tv: () => fetchData("genre/tv/list"),
+  movies: () => fetchData<{ genres: Genre[] }>("genre/movie/list"),
+  tv: () => fetchData<{ genres: Genre[] }>("genre/tv/list"),
 };
 
 /* ==================================
    Utilidades generales
 ================================== */
 export const searchMulti = (query: string) =>
-  fetchData(`search/multi?query=${encodeURIComponent(query)}`);
+  fetchData<PaginatedResponse<SearchResult>>(
+    `search/multi?query=${encodeURIComponent(query)}`
+  );
 
 export const searchCollection = (query: string) =>
-  fetchData(`search/collection?query=${encodeURIComponent(query)}`); 
+  fetchData<PaginatedResponse<Collection>>(
+    `search/collection?query=${encodeURIComponent(query)}`
+  );
 
 export const getCollection = (id: number | string) =>
-  fetchData(`collection/${id}`); // Detalles de una colección
+  fetchData<Collection>(`collection/${id}`); // Detalles de una colección
 
 export const getTrending = (
   mediaType: MediaType | "all",
   timeWindow: "day" | "week"
-) => fetchData(`trending/${mediaType}/${timeWindow}`);
+) =>
+  fetchData<PaginatedResponse<Movie | TVShow>>(
+    `trending/${mediaType}/${timeWindow}`
+  );
 
 export const getDiscover = (category: MediaType, query?: string) =>
-  fetchData(`discover/${category}${query ? `?${query}` : ""}`); // Recomendaciones
+  fetchData<PaginatedResponse<Movie | TVShow>>(
+    `discover/${category}${query ? `?${query}` : ""}`
+  ); // Recomendaciones

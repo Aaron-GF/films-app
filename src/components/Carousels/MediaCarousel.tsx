@@ -48,8 +48,8 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
               href = `/${category}/${mediaItem.id}`;
             } else {
               href = mediaItem.title
-                ? `/movie/${mediaItem.id}`
-                : `/tv/${mediaItem.id}`;
+                ? `/movies/${mediaItem.id}`
+                : `/series/${mediaItem.id}`;
             }
             return (
               <div

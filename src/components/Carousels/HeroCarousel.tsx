@@ -49,8 +49,8 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
         {media.map((mediaItem, index) => {
           const href =
             mediaItem.media_type === "movie"
-              ? `/movie/${mediaItem.id}`
-              : `/tv/${mediaItem.id}`;
+              ? `/movies/${mediaItem.id}`
+              : `/series/${mediaItem.id}`;
           return (
             <div
               key={mediaItem.id}

@@ -19,8 +19,8 @@ export default function SearchDropdown({
   if (results.length === 0) return null;
 
   const getHref = (item: SearchResult) => {
-    if (item.media_type === "movie") return `/movie/${item.id}`;
-    if (item.media_type === "tv") return `/tv/${item.id}`;
+    if (item.media_type === "movie") return `/movies/${item.id}`;
+    if (item.media_type === "tv") return `/series/${item.id}`;
     return `/collections/${item.id}`;
   };
 
