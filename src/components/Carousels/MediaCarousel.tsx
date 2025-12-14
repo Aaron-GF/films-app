@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { MediaItem } from "@/types/tmdb";
+import CarouselButton from "./CarouselButton";
 
 interface MediaCarouselProps {
   media: MediaItem[];
@@ -29,24 +30,11 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
   return (
     <div className="relative w-full overflow-hidden">
       <div className="flex items-center">
-        <button
+        <CarouselButton
+          direction="prev"
           onClick={prevSlide}
-          className="absolute left-0 z-content p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-          aria-label="Previous slide"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
+          label="Previous slide"
+        />
 
         <div
           className="flex w-full transition-transform duration-normal ease-in-out"
@@ -85,13 +73,11 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
           })}
         </div>
 
-        <button
+        <CarouselButton
+          direction="next"
           onClick={nextSlide}
-          className="absolute right-0 z-content p-2 bg-dark bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all"
-          aria-label="Next slide"
-        >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
+          label="Next slide"
+        />
       </div>
     </div>
   );

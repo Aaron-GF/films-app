@@ -1,12 +1,16 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
 
+/* Componentes */
 import Searchbar from "@/components/Navbar/Searchbar";
 import SearchDropdown from "@/components/Navbar/SearchDropdown";
+
+/* Endpoints */
 import { searchMulti } from "@/lib/endpoints";
 import { searchCollection } from "@/lib/endpoints";
+
+/* Utils */
 import { getYear } from "@/utils/getYear";
 
 interface SearchResult {
@@ -87,7 +91,7 @@ export default function Navbar() {
           aria-label="Menú de navegación"
           aria-expanded={isMobileMenuOpen}
         >
-          <svg fill="none" stroke="currentColor" className="`size-5 transition-transform duration-300 ${ isMobileMenuOpen ? &quot;rotate-180&quot; : &quot;&quot; }`" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/></svg>
+          <svg fill="none" stroke="currentColor" className={`size-5 transition-transform duration-300 ${ isMobileMenuOpen ? "rotate-180" : "" }`} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/></svg>
         </button>
       </div>
 

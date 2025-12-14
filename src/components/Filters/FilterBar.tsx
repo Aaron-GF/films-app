@@ -51,7 +51,21 @@ export default function FilterBar({
             {selectedGenre
               ? genres.find((g) => g.id === selectedGenre)?.name
               : "Todos los géneros"}
-            <svg stroke="currentColor" className="`size-4 transition-transform ${ showGenres ? &quot;rotate-180&quot; : &quot;&quot; }`" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7"/></svg>
+            <svg
+              className={`size-4 transition-transform ${
+                showGenres ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
           </button>
 
           {/* Dropdown de géneros */}

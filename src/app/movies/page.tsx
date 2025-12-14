@@ -1,9 +1,14 @@
 "use client";
-
 import { useState, useEffect } from "react";
+
+/* Endpoints */
 import { getMovies, getGenres, getDiscover } from "@/lib/endpoints";
+
+/* Componentes */
 import FilterBar from "@/components/Filters/FilterBar";
 import MediaGrid from "@/components/Media/MediaGrid";
+
+/* Tipos */
 import type { Movie, Genre } from "@/types/tmdb";
 
 type MovieCategory = "popular" | "top_rated" | "now_playing" | "upcoming";

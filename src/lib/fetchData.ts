@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 const options: RequestInit = {
   method: "GET",

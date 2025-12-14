@@ -1,13 +1,19 @@
-import MediaCredits from "@/components/Credits/MediaCredits";
-import { getSeries } from "@/lib/endpoints";
-import { translateGenres } from "@/utils/genreTranslations";
 import Image from "next/image";
-import StarRating from "@/components/Ratings/StarRating";
-import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
-import { formatDate } from "@/utils/formatDate";
+
+/* Componentes */
 import SeasonInfo from "@/components/Seasons/SeasonInfo";
 import WatchProvidersInfo from "@/components/WatchProviders/WatchProvidersInfo";
+import StarRating from "@/components/Ratings/StarRating";
+import TrailerPlayer from "@/components/TrailerPlayer/TrailerPlayer";
+import MediaCredits from "@/components/Credits/MediaCredits";
+
+/* Utilidades */
+import { translateGenres } from "@/utils/genreTranslations";
 import { generateMediaMetadata } from "@/utils/generateMediaMetadata";
+import { formatDate } from "@/utils/formatDate";
+
+/* Endpoints */
+import { getSeries } from "@/lib/endpoints";
 
 export async function generateMetadata({
   params,
@@ -90,7 +96,7 @@ export default async function SeriesDetails({
             <TrailerPlayer videos={videos?.results ?? []} />
           </div>
         </div>
-        
+
         <WatchProvidersInfo watchProviders={watchProviders} />
         {series.seasons && series.seasons.length > 0 && (
           <SeasonInfo seriesId={series.id} seasons={series.seasons} />

@@ -12,57 +12,65 @@ export default function MediaCredits({ cast, crew }: MediaCreditsProps) {
     : [];
   const mainCast = cast.slice(0, 12);
 
+  const CreditCard = ({
+    item,
+    role,
+  }: {
+    item: CastMember | CrewMember;
+    role?: string;
+  }) => (
+    <div className="group relative aspect-2/3 rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+      {item.profile_path ? (
+        <Image
+          src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+          alt={item.name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg fill="none" stroke="currentColor" className="w-24 h-24" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0m-4 7a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7"/></svg>
+        </div>
+      )}
+
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/10 to-transparent" />
+
+      {/* Content - Always visible, no movement */}
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <p className="font-bold text-sm leading-tight">
+          {item.name}
+        </p>
+        <p className="text-yellow-light text-xs mt-1">{role}</p>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="flex flex-col gap-6 p-10 mt-10">
-      {crew && (
-        <>
-          <h2 className="m-4 text-2xl font-bold text-yellow-dark">
+    <section className="flex flex-col gap-8 p-6 md:p-10 mt-6">
+      {crew && directors.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-yellow-dark px-2 border-l-4 border-yellow-dark">
             Dirigida por
           </h2>
-          <div className="flex flex-wrap gap-12 m-2">
+          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {directors.map((director) => (
-              <div key={director.id} className="flex flex-col items-center text-center">
-                {director.profile_path ? (
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original${director.profile_path}`}
-                    alt={director.name}
-                    width={90}
-                    height={90}
-                    className="w-25 h-40 object-cover rounded-full mb-2 ml-4 transition-transform hover:scale-140 hover:rounded-md hover:mask-b-from-70%"
-                  />
-                ) : (
-                  <div className="size-24 rounded-full" />
-                )}
-                <span className="font-medium mt-2 z-10">{director.name}</span>
-              </div>
+              <CreditCard key={director.id} item={director} role="Director" />
             ))}
           </div>
-        </>
+        </div>
       )}
-      <h2 className="m-4 text-2xl font-bold text-yellow-dark">
-        Reparto principal
-      </h2>
-      <div className="flex flex-wrap gap-12 m-2">
-        {mainCast.map((actor) => (
-          <div
-            key={actor.id}
-            className="flex flex-col items-center text-center max-w-30"
-          >
-            {actor.profile_path && (
-              <Image
-                src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
-                alt={actor.name}
-                width={90}
-                height={90}
-                className="size-auto object-cover rounded-full mb-2 transition-transform hover:scale-140 hover:rounded hover:mask-b-from-70%"
-              />
-            )}
-            <span className="font-medium z-10 mt-auto">{actor.name}</span>
-            <span className="text-xs text-gray-400 z-10">
-              {actor.character}
-            </span>
-          </div>
-        ))}
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold text-yellow-dark px-2 border-l-4 border-yellow-dark">
+          Reparto principal
+        </h2>
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4">
+          {mainCast.map((actor) => (
+            <CreditCard key={actor.id} item={actor} role={actor.character} />
+          ))}
+        </div>
       </div>
     </section>
   );

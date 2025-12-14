@@ -15,11 +15,23 @@ export default function CarouselButton({
   return (
     <button
       type="button"
-      className={`absolute top-1/2 ${positionClass} z-overlay p-2 -translate-y-1/2 bg-dark/50 rounded-full hover:bg-dark/75 transition-colors`}
+      className={`absolute top-1/2 ${positionClass} z-overlay p-2 -translate-y-1/2 bg-dark/50 rounded-full hover:bg-dark/75 transition-colors outline-1 outline-yellow-dark/40`}
       onClick={onClick}
       aria-label={label}
     >
-      <svg fill="none" stroke="currentColor" className="size-6" viewBox="0 0 24 24"/>
+      <svg
+        className="size-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d={iconPath}
+        />
+      </svg>
     </button>
   );
 }
