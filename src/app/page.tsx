@@ -19,7 +19,7 @@ export default async function Home() {
   const upcomingMovies = await getMovies.list("upcoming"); // Proximos estrenos de películas
 
   // Colecciones destacadas
-  const collectionIds = [86311, 10, 1241, 119, 328, 263]; // Los Vengadores, Star Wars, Harry Potter, El Señor de los Anillos, Jurassic Park, Batman
+  const collectionIds = ["86311", "10", "1241", "119", "328", "263"]; // Los Vengadores, Star Wars, Harry Potter, El Señor de los Anillos, Jurassic Park, Batman
   const collectionsPromise = collectionIds.map((id) => getCollection(id));
   const collectionsRaw = await Promise.all(collectionsPromise);
   const collections = collectionsRaw
