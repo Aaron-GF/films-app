@@ -51,7 +51,7 @@ export interface Movie {
   };
 }
 
-export interface Collection {
+export interface Collection extends Record<string, unknown> {
   id: number;
   name: string;
   overview: string;
