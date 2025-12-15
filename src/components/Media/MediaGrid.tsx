@@ -21,7 +21,7 @@ export default function MediaGrid({ media, mediaType }: MediaGridProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
       {media.map((item, index) => {
-        const title = "title" in item ? item.title : item.name;
+        const title = ("title" in item ? item.title : item.name) as string;
         const href =
           mediaType === "movie" ? `/movies/${item.id}` : `/series/${item.id}`;
         const backdropPath = item.backdrop_path || item.poster_path;

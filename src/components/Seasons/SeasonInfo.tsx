@@ -30,7 +30,7 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
       if (!seasonData.has(seasonNumber)) {
         setLoadingSeasons((prev) => new Set(prev).add(seasonNumber));
         try {
-          const data = await getSeries.season(seriesId, seasonNumber);
+          const data = await getSeries.season(seriesId.toString(), seasonNumber);
           setSeasonData((prev) => new Map(prev).set(seasonNumber, data));
         } catch (error) {
           console.error(`Error fetching season ${seasonNumber}:`, error);
