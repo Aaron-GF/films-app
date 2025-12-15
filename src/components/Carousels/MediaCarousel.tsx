@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -56,17 +55,17 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
                 key={mediaItem.id}
                 className="flex shrink-0 w-1/3 lg:w-1/6 px-2"
               >
-                <Link key={mediaItem.id} href={href}>
-                  <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-normal cursor-pointer">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`}
-                      alt={mediaItem.title || mediaItem.name}
-                      title={mediaItem.title || mediaItem.name}
-                      width={300}
-                      height={450}
-                      className="w-full h-auto"
-                    />
-                  </div>
+                <Link
+                  href={href}
+                  className="block rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-normal cursor-pointer"
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`}
+                    alt={mediaItem.title || mediaItem.name}
+                    title={mediaItem.title || mediaItem.name}
+                    width={300}
+                    height={450}
+                  />
                 </Link>
               </div>
             );

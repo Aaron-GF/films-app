@@ -6,9 +6,8 @@ import type {
   Genre,
   PaginatedResponse,
   SearchResult,
-  Credits,
-  Video,
   WatchProvidersResponse,
+  Season,
 } from "@/types/tmdb";
 
 type MediaType = "movie" | "tv";
@@ -39,7 +38,7 @@ export const getSeries = {
   detailsEndpoint: <T = any>(id: number | string, endpoint: DetailsEndPoint) =>
     fetchData<T>(`tv/${id}/${endpoint}`), // Detalle en específico
   season: (seriesId: number | string, seasonNumber: number) =>
-    fetchData<any>(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
+    fetchData<Season>(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
   watchProviders: (id: number | string) =>
     fetchData<WatchProvidersResponse>(`tv/${id}/watch/providers`), // Proveedores de streaming
 };

@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 /* Componentes */
 import Searchbar from "@/components/Navbar/Searchbar";
 import SearchDropdown from "@/components/Navbar/SearchDropdown";
+import MobileMenu from "@/components/Navbar/MobileMenu";
 
 /* Endpoints */
 import { searchMulti } from "@/lib/endpoints";
@@ -29,12 +31,19 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSearch = async (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
     // Buscar en películas/series y colecciones en paralelo
     const [multiRes, collectionRes] = await Promise.all([
       searchMulti(query),
@@ -77,7 +86,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center fixed top-0 z-navbar px-4 md:px-10 py-4 w-full bg-dark">
+    <header className="flex justify-between items-center fixed top-0 z-70 px-4 md:px-10 h-18 w-full bg-dark pb-1">
       {/* Logo con flecha desplegable en móvil */}
       <div className="flex items-center gap-2">
         <Link href="/">
@@ -96,41 +105,37 @@ export default function Navbar() {
       </div>
 
       {/* Navegación - Desktop */}
-      <nav className="hidden md:flex gap-8">
-        {NAV_LINKS.map((link) => (
-          <Link key={link.name} href={link.href}>
-            <button className="text-yellow-dark hover:text-yellow-light transition-colors">
-              {link.name}
-            </button>
-          </Link>
-        ))}
-      </nav>
+      <nav className="hidden md:flex h-full">
+        {NAV_LINKS.map((link) => {
+          const isActive =
+            pathname === link.href ||
+            (link.href !== "/" && pathname.startsWith(link.href));
 
-      {/* Searchbar */}
-      <Searchbar onSearch={handleSearch} value={selectedValue} />
-
-      {/* Menú móvil desplegable */}
-      <nav
-        className={`md:hidden absolute top-16 left-0 right-0 bg-dark border-t border-yellow-dark/20 transition-all duration-300 ${
-          isMobileMenuOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
-      >
-        <div className="flex flex-col p-4 gap-2">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <button className="w-full text-left py-2 px-4 text-yellow-dark hover:bg-yellow-dark/10 rounded transition-colors">
+          return (
+            <Link key={link.name} href={link.href} className="h-full">
+              <button
+                className={`w-28 h-full font-medium transition-all flex items-center justify-center ${
+                  isActive
+                    ? "bg-yellow-dark/20 text-yellow-light"
+                    : "text-yellow-dark hover:bg-yellow-dark/10 hover:text-yellow-light"
+                }`}
+              >
                 {link.name}
               </button>
             </Link>
-          ))}
-        </div>
+          );
+        })}
       </nav>
+
+      {/* Buscador */}
+      <Searchbar onSearch={handleSearch} value={selectedValue} />
+
+      {/* Menú móvil desplegable */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        links={NAV_LINKS}
+      />
 
       {/* Dropdown de sugerencias de búsqueda */}
       {showDropdown && (

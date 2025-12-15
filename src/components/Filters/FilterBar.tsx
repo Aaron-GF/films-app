@@ -71,35 +71,24 @@ export default function FilterBar({
           {/* Dropdown de géneros */}
           {showGenres && (
             <div className="absolute top-full mt-2 bg-dark/95 backdrop-blur-md border border-yellow-dark/20 rounded-lg shadow-lg max-h-60 overflow-y-auto z-dropdown">
-              <button
-                onClick={() => {
-                  onGenreChange(null);
-                  setShowGenres(false);
-                }}
-                className={`w-full text-left px-4 py-2 hover:bg-yellow-dark/20 transition-colors ${
-                  selectedGenre === null
-                    ? "bg-yellow-dark/30 text-yellow-light"
-                    : "text-light"
-                }`}
-              >
-                Todos los géneros
-              </button>
-              {genres.map((genre) => (
-                <button
-                  key={genre.id}
-                  onClick={() => {
-                    onGenreChange(genre.id);
-                    setShowGenres(false);
-                  }}
-                  className={`w-full text-left px-4 py-2 hover:bg-yellow-dark/20 transition-colors ${
-                    selectedGenre === genre.id
-                      ? "bg-yellow-dark/30 text-yellow-light"
-                      : "text-light"
-                  }`}
-                >
-                  {genre.name}
-                </button>
-              ))}
+              {[{ id: null, name: "Todos los géneros" }, ...genres].map(
+                (option) => (
+                  <button
+                    key={option.id ?? "all"}
+                    onClick={() => {
+                      onGenreChange(option.id as number | null);
+                      setShowGenres(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 hover:bg-yellow-dark/20 transition-colors ${
+                      selectedGenre === option.id
+                        ? "bg-yellow-dark/30 text-yellow-light"
+                        : "text-light"
+                    }`}
+                  >
+                    {option.name}
+                  </button>
+                )
+              )}
             </div>
           )}
         </div>
