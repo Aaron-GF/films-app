@@ -21,10 +21,10 @@ type DetailsEndPoint = "credits" | "videos" | "similar";
 export const getMovies = {
   list: (type: MovieListType) =>
     fetchData<PaginatedResponse<Movie>>(`movie/${type}`),
-  details: (id: number | string) => fetchData<Movie>(`movie/${id}`), // Detalles en general
-  detailsEndpoint: <T = any>(id: number | string, endpoint: DetailsEndPoint) =>
+  details: (id: string) => fetchData<Movie>(`movie/${id}`), // Detalles en general
+  detailsEndpoint: <T = any>(id: string, endpoint: DetailsEndPoint) =>
     fetchData<T>(`movie/${id}/${endpoint}`), // Detalle en específico
-  watchProviders: (id: number | string) =>
+  watchProviders: (id: string) =>
     fetchData<WatchProvidersResponse>(`movie/${id}/watch/providers`), // Proveedores de streaming
 };
 
@@ -34,12 +34,12 @@ export const getMovies = {
 export const getSeries = {
   list: (type: SeriesListType) =>
     fetchData<PaginatedResponse<TVShow>>(`tv/${type}`),
-  details: (id: number | string) => fetchData<TVShow>(`tv/${id}`), // Detalles en general
-  detailsEndpoint: <T = any>(id: number | string, endpoint: DetailsEndPoint) =>
+  details: (id: string) => fetchData<TVShow>(`tv/${id}`), // Detalles en general
+  detailsEndpoint: <T = any>(id: string, endpoint: DetailsEndPoint) =>
     fetchData<T>(`tv/${id}/${endpoint}`), // Detalle en específico
-  season: (seriesId: number | string, seasonNumber: number) =>
+  season: (seriesId: string, seasonNumber: number) =>
     fetchData<Season>(`tv/${seriesId}/season/${seasonNumber}`), // Información de temporadas y episodios
-  watchProviders: (id: number | string) =>
+  watchProviders: (id: string) =>
     fetchData<WatchProvidersResponse>(`tv/${id}/watch/providers`), // Proveedores de streaming
 };
 
@@ -64,7 +64,7 @@ export const searchCollection = (query: string) =>
     `search/collection?query=${encodeURIComponent(query)}`
   );
 
-export const getCollection = (id: number | string) =>
+export const getCollection = (id: string) =>
   fetchData<Collection>(`collection/${id}`); // Detalles de una colección
 
 export const getTrending = (

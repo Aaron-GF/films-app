@@ -33,7 +33,7 @@ export interface PaginatedResponse<T> {
    Películas
 ================================== */
 
-export interface Movie {
+export interface Movie extends Record<string, unknown> {
   id: number;
   title: string;
   overview: string;
@@ -86,7 +86,7 @@ export interface Season {
   episodes?: Episode[];
 }
 
-export interface TVShow {
+export interface TVShow extends Record<string, unknown> {
   id: number;
   name: string;
   overview: string;
