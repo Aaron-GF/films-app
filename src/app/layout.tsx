@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 
+import { Analytics } from "@vercel/analytics/next";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -34,6 +36,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${roboto_mono.variable} antialiased`}>
         <Navbar />
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>
