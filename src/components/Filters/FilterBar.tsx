@@ -23,15 +23,15 @@ export default function FilterBar({
   const [showGenres, setShowGenres] = useState(false);
 
   return (
-    <div className="sticky top-20 z-navbar bg-dark/95 backdrop-blur-md border-b border-yellow-dark/20 py-4">
-      <div className="container mx-auto px-4">
+    <div className="sticky top-20 z-navbar bg-dark/95 backdrop-blur-md border-b border-yellow-dark/20 md:py-4 py-2">
+      <div className="container mx-auto px-2 sm:px-4">
         {/* Filtros de categoría */}
         <div className="flex flex-wrap gap-2 mb-4">
           {categories.map((category) => (
             <button
               key={category.value}
               onClick={() => onCategoryChange(category.value)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`sm:px-4 px-2 sm:py-2 py-1 rounded-lg font-medium transition-all text-sm sm:text-base ${
                 selectedCategory === category.value
                   ? "bg-yellow-dark text-dark"
                   : "bg-dark/50 text-light hover:bg-yellow-dark/20 hover:text-yellow-light"
@@ -46,7 +46,7 @@ export default function FilterBar({
         <div className="relative">
           <button
             onClick={() => setShowGenres(!showGenres)}
-            className="px-4 py-2 rounded-lg font-medium bg-dark/50 text-light hover:bg-yellow-dark/20 hover:text-yellow-light transition-all flex items-center gap-2"
+            className="sm:px-4 px-2 sm:py-2 py-1 rounded-lg font-medium bg-dark/50 text-light hover:bg-yellow-dark/20 hover:text-yellow-light transition-all flex items-center gap-2 text-sm sm:text-base"
           >
             {selectedGenre
               ? genres.find((g) => g.id === selectedGenre)?.name

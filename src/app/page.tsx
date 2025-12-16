@@ -32,7 +32,7 @@ export default async function Home() {
     }));
 
   return (
-    <main className="flex flex-col gap-8 mx-auto p-4 md:p-10 mt-20">
+    <main className="flex flex-col gap-8 mx-auto p-2 sm:p-4 md:p-10 mt-20">
       <HeroCarousel media={trending.results} />
 
       <h2 className="text-2xl font-bold">Nuevos episodios</h2>

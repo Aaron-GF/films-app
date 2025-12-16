@@ -53,7 +53,7 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
             return (
               <div
                 key={mediaItem.id}
-                className="flex shrink-0 w-1/3 lg:w-1/6 px-2"
+                className="flex shrink-0 w-1/3 lg:w-1/6 px-1 sm:px-2"
               >
                 <Link
                   href={href}

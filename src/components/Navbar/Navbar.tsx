@@ -86,7 +86,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center fixed top-0 z-70 px-4 md:px-10 h-18 w-full bg-dark pb-1">
+    <header className="flex justify-between items-center fixed top-0 z-70 px-2 sm:px-4 md:px-10 h-18 w-full bg-dark pb-1">
       {/* Logo con flecha desplegable en móvil */}
       <div className="flex items-center gap-2">
         <Link href="/">

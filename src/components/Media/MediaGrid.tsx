@@ -19,7 +19,7 @@ export default function MediaGrid({ media, mediaType }: MediaGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
       {media.map((item, index) => {
         const title = ("title" in item ? item.title : item.name) as string;
         const href =
@@ -30,7 +30,7 @@ export default function MediaGrid({ media, mediaType }: MediaGridProps) {
 
         return (
           <Link key={item.id} href={href}>
-            <div className="group relative aspect-video rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-medium cursor-pointer">
+            <div className="group relative aspect-video rounded-md overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-medium cursor-pointer">
               {/* Imagen de fondo */}
               <Image
                 src={`https://image.tmdb.org/t/p/w780${backdropPath}`}
@@ -46,7 +46,7 @@ export default function MediaGrid({ media, mediaType }: MediaGridProps) {
 
               {/* Contenido */}
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h3 className="text-light font-bold text-sm md:text-base line-clamp-2 mb-2">
+                <h3 className="text-light font-bold text-xs sm:text-base line-clamp-2 mb-2">
                   {title}
                 </h3>
 

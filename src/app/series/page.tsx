@@ -91,7 +91,7 @@ export default function SeriesPage() {
         onGenreChange={setSelectedGenre}
       />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
         <h1 className="text-3xl md:text-4xl font-bold text-yellow-dark mb-8">
           {getPageTitle()}
         </h1>

@@ -70,6 +70,8 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
                 className="object-cover object-center"
                 priority={index === 0}
                 sizes="100vw"
+                fetchPriority={index === 0 ? "high" : "auto"} // para cargar la primera imagen con prioridad
+                loading={index === 0 ? "eager" : "lazy"}
               />
               <div className="relative z-overlay flex flex-col justify-end h-full p-8">
                 <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">
@@ -81,7 +83,7 @@ export default function HeroCarousel({ media }: HeroCarouselProps) {
                   </p>
                 )}
                 <Link key={mediaItem.id} href={href}>
-                  <button className="self-start px-4 md:px-6 py-1 md:py-2 text-lg font-medium text-gray-dark bg-yellow-dark rounded-md hover:bg-yellow-light transition-colors mb-4">
+                  <button className="self-start px-4 md:px-6 py-1 md:py-2 text-lg font-medium text-gray-dark bg-yellow-dark rounded-md hover:bg-yellow-light transition-colors mb-4" aria-label={`Ver más - ${mediaItem.title || mediaItem.name}`}>
                     Ver más
                   </button>
                 </Link>
