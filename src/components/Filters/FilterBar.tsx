@@ -27,10 +27,10 @@ export default function FilterBar({
   const [showGenres, setShowGenres] = useState(false);
   const [showYears, setShowYears] = useState(false);
 
-  // Generate year options (current year to 1900)
+  // genera la lista de años (año actual - 1949)
   const currentYear = new Date().getFullYear();
   const years = Array.from(
-    { length: currentYear - 1899 },
+    { length: currentYear - 1949 },
     (_, i) => currentYear - i
   );
 
