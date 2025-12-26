@@ -48,7 +48,7 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
   const regularSeasons = seasons.filter((season) => season.season_number > 0);
 
   return (
-    <section className="mt-18 space-y-4">
+    <section className="mt-18 space-y-2 md:space-y-4">
       {regularSeasons.map((season) => {
         const isExpanded = expandedSeasons.has(season.season_number);
         const isLoading = loadingSeasons.has(season.season_number);
@@ -57,53 +57,58 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
         return (
           <div
             key={season.id}
-            className="rounded-xl bg-dark/60 backdrop-blur-md border border-light/10 overflow-hidden transition-all duration-medium hover:border-yellow-dark/50"
+            className="rounded-md bg-dark/60 backdrop-blur-md border border-light/10 overflow-hidden transition-all duration-medium hover:border-yellow-dark/50"
           >
             <button
               onClick={() => toggleSeason(season.season_number)}
-              className="w-full p-6 flex items-center gap-6 hover:bg-light/5 transition-colors"
+              className="w-full p-4 md:p-6 text-left hover:bg-light/5 transition-colors group"
               aria-expanded={isExpanded}
               aria-label={`${isExpanded ? "Contraer" : "Expandir"} ${
                 season.name
               }`}
             >
-              {season.poster_path && (
-                <div className="relative w-20 h-28 shrink-0 rounded-lg overflow-hidden shadow-lg">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
-                    alt={season.name}
-                    width={200}
-                    height={280}
-                    className="object-cover"
-                  />
-                </div>
-              )}
-
-              <div className="flex-1 text-left">
-                <h3 className="text-2xl font-bold mb-2">{season.name}</h3>
-                <div className="flex flex-wrap gap-4 text-light/70 mb-2">
-                  {season.air_date && (
-                    <span>{season.air_date.substring(0, 4)}</span>
-                  )}
-                  <span>
-                    {season.episode_count}{" "}
-                    {season.episode_count === 1 ? "episodio" : "episodios"}
-                  </span>
-                </div>
-                {season.overview && (
-                  <p className="text-light/80 line-clamp-2">
-                    {season.overview}
-                  </p>
+              <div className="flex items-center gap-4 md:gap-6">
+                {season.poster_path && (
+                  <div className="relative w-16 h-24 md:w-20 md:h-28 shrink-0 rounded-md overflow-hidden shadow-lg">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
+                      alt={season.name}
+                      width={200}
+                      height={280}
+                      className="object-cover"
+                    />
+                  </div>
                 )}
+
+                <div className="flex-1">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2">
+                    {season.name}
+                  </h3>
+                  <div className="flex flex-wrap gap-4 text-light/70 text-sm md:text-base">
+                    {season.air_date && (
+                      <span>{season.air_date.substring(0, 4)}</span>
+                    )}
+                    <span>
+                      {season.episode_count}{" "}
+                      {season.episode_count === 1 ? "episodio" : "episodios"}
+                    </span>
+                  </div>
+                </div>
+
+                <span
+                  className={`text-yellow-dark text-2xl transition-transform duration-medium ${
+                    isExpanded ? "rotate-180" : ""
+                  } group-hover:scale-110`}
+                >
+                  ▼
+                </span>
               </div>
 
-              <span
-                className={`text-yellow-dark text-2xl transition-transform duration-medium ${
-                  isExpanded ? "rotate-180" : ""
-                }`}
-              >
-                ▼
-              </span>
+              {season.overview && (
+                <p className="mt-4 text-light/80 text-sm leading-relaxed">
+                  {season.overview}
+                </p>
+              )}
             </button>
 
             {isExpanded && (
@@ -117,7 +122,7 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
                     {episodes.map((episode: Episode) => (
                       <div
                         key={episode.id}
-                        className="rounded-lg bg-gray-dark/50 overflow-hidden hover:bg-gray-dark/70 transition-colors"
+                        className="rounded-xl bg-gray-dark/50 overflow-hidden hover:bg-gray-dark/70 transition-colors"
                       >
                         {episode.still_path && (
                           <div className="relative w-full aspect-video">
@@ -141,7 +146,7 @@ export default function SeasonInfo({ seriesId, seasons }: SeasonInfoProps) {
                             </p>
                           )}
                           {episode.overview && (
-                            <p className="text-sm text-light/80 line-clamp-3">
+                            <p className="text-sm text-light/80">
                               {episode.overview}
                             </p>
                           )}
