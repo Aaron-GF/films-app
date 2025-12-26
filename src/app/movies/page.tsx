@@ -33,6 +33,7 @@ export default function MoviesPage() {
   const [selectedCategory, setSelectedCategory] =
     useState<MovieCategory>("popular");
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Carga géneros al montar
@@ -54,9 +55,12 @@ export default function MoviesPage() {
       setLoading(true);
       try {
         let data;
-        if (selectedGenre) {
-          // Usar discover cuando hay género seleccionado
-          data = await getDiscover("movie", `with_genres=${selectedGenre}`);
+        if (selectedGenre || selectedYear) {
+          // Usar discover cuando hay género o año seleccionado
+          const params = [];
+          if (selectedGenre) params.push(`with_genres=${selectedGenre}`);
+          if (selectedYear) params.push(`primary_release_year=${selectedYear}`);
+          data = await getDiscover("movie", params.join("&"));
         } else {
           // Usar lista de categoría
           data = await getMovies.list(selectedCategory);
@@ -70,14 +74,20 @@ export default function MoviesPage() {
       }
     };
     loadMovies();
-  }, [selectedCategory, selectedGenre]);
+  }, [selectedCategory, selectedGenre, selectedYear]);
 
   const getPageTitle = () => {
+    const parts = [];
     if (selectedGenre) {
       const genre = genres.find((g) => g.id === selectedGenre);
-      return `Películas de ${genre?.name || ""}`;
+      parts.push(`Películas de ${genre?.name || ""}`);
+    } else {
+      parts.push(CATEGORY_TITLES[selectedCategory]);
     }
-    return CATEGORY_TITLES[selectedCategory];
+    if (selectedYear) {
+      parts.push(`(${selectedYear})`);
+    }
+    return parts.join(" ");
   };
 
   return (
@@ -87,11 +97,13 @@ export default function MoviesPage() {
         genres={genres}
         selectedCategory={selectedCategory}
         selectedGenre={selectedGenre}
+        selectedYear={selectedYear}
         onCategoryChange={(category) => {
           setSelectedCategory(category as MovieCategory);
           setSelectedGenre(null); // Reset genre filter when changing category
         }}
         onGenreChange={setSelectedGenre}
+        onYearChange={setSelectedYear}
       />
 
       <main className="container mx-auto px-2 sm:px-4 py-8">

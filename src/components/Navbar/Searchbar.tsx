@@ -38,7 +38,7 @@ export default function Searchbar({ value, onSearch }: SearchbarProps) {
       <input
         type="search"
         placeholder="¿Que estás buscando?"
-        className="outline-none placeholder:text-sm sm:placeholder:text-base"
+        className="outline-none placeholder:text-sm"
         value={input}
         onChange={handleTextChange}
       />

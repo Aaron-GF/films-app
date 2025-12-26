@@ -27,12 +27,13 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
   };
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-scroll">
       <div className="flex items-center">
         <CarouselButton
           direction="prev"
           onClick={prevSlide}
           label="Previous slide"
+          className="hide-on-touch"
         />
 
         <div
@@ -76,6 +77,7 @@ export default function MediaCarousel({ media, category }: MediaCarouselProps) {
           direction="next"
           onClick={nextSlide}
           label="Next slide"
+          className="hide-on-touch"
         />
       </div>
     </div>

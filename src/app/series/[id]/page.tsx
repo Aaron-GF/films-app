@@ -56,7 +56,7 @@ export default async function SeriesDetails({
         </h1>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <figure className="w-1/5 rounded overflow-hidden shadow-lg">
+          <figure className="w-60 shadow-lg">
             <Image
               src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
               alt={series.name || "Poster de la serie"}

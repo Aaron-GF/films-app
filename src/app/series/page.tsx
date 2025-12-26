@@ -29,6 +29,7 @@ export default function SeriesPage() {
   const [selectedCategory, setSelectedCategory] =
     useState<SeriesCategory>("popular");
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Cargar géneros al montar
@@ -51,9 +52,12 @@ export default function SeriesPage() {
       setLoading(true);
       try {
         let data;
-        if (selectedGenre) {
-          // Usar discover cuando hay género seleccionado
-          data = await getDiscover("tv", `with_genres=${selectedGenre}`);
+        if (selectedGenre || selectedYear) {
+          // Usar discover cuando hay género o año seleccionado
+          const params = [];
+          if (selectedGenre) params.push(`with_genres=${selectedGenre}`);
+          if (selectedYear) params.push(`first_air_date_year=${selectedYear}`);
+          data = await getDiscover("tv", params.join("&"));
         } else {
           // Usar lista de categoría
           data = await getSeries.list(selectedCategory);
@@ -67,14 +71,20 @@ export default function SeriesPage() {
       }
     };
     loadSeries();
-  }, [selectedCategory, selectedGenre]);
+  }, [selectedCategory, selectedGenre, selectedYear]);
 
   const getPageTitle = () => {
+    const parts = [];
     if (selectedGenre) {
       const genre = genres.find((g) => g.id === selectedGenre);
-      return `Series de ${genre?.name || ""}`;
+      parts.push(`Series de ${genre?.name || ""}`);
+    } else {
+      parts.push(CATEGORY_TITLES[selectedCategory]);
     }
-    return CATEGORY_TITLES[selectedCategory];
+    if (selectedYear) {
+      parts.push(`(${selectedYear})`);
+    }
+    return parts.join(" ");
   };
 
   return (
@@ -84,11 +94,13 @@ export default function SeriesPage() {
         genres={genres}
         selectedCategory={selectedCategory}
         selectedGenre={selectedGenre}
+        selectedYear={selectedYear}
         onCategoryChange={(category) => {
           setSelectedCategory(category as SeriesCategory);
           setSelectedGenre(null); // Reset genre filter when changing category
         }}
         onGenreChange={setSelectedGenre}
+        onYearChange={setSelectedYear}
       />
 
       <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">

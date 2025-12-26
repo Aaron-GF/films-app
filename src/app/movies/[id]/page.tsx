@@ -91,22 +91,9 @@ export default async function MovieDetails({
               </p>
             )}
 
-            {movie.runtime && (
+            {movie.runtime > 0 && (
               <span className="inline-flex items-center gap-2 bg-gray-dark px-3 py-2 rounded-full text-base">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 2h4m-2 12 3-3" />
-                  <circle cx="12" cy="14" r="8" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M10 2h4m-2 12 3-3"/><circle cx="12" cy="14" r="8"/></svg>
                 {movie.runtime} min
               </span>
             )}
@@ -119,21 +106,7 @@ export default async function MovieDetails({
                   href={`/collections/${movie.belongs_to_collection.id}`}
                   className="flex items-center gap-2 px-4 py-2 bg-yellow-dark text-dark hover:bg-yellow-dark/10 hover:text-yellow-dark hover:outline-yellow-dark hover:outline rounded-md font-semibold transition-all duration-normal"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
-                    <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
-                    <path d="M6 6h.01M6 18h.01" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><path d="M6 6h.01M6 18h.01"/></svg>
                   Ver colección
                 </Link>
               )}

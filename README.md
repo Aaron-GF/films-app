@@ -19,13 +19,12 @@ Una aplicación web que permite explorar películas y series de televisión, con
 
 ## ✨ Características
 
-- 🎥 **Exploración de contenido**: Navega por películas y series populares, mejor valoradas, en cartelera y próximos estrenos
-- 🔍 **Búsqueda avanzada**: Busca películas y series con filtros por género y categoría
+- 🎥 **Exploración de contenido**: Navega por películas y series con diferentes filtros
+- 🔍 **Búsqueda avanzada**: Busca películas y series con desplegable de sugerencias
 - 📺 **Información detallada**: Visualiza detalles completos incluyendo sinopsis, reparto, calificaciones y tráilers
-- ⭐ **Sistema de valoraciones**: Visualización de calificaciones con estrellas dinámicas
 - 🎬 **Reproductor de tráilers**: Integración con YouTube para ver tráilers directamente
-- 📱 **Proveedores de streaming**: Información sobre dónde ver el contenido 
-- 🎭 **Información de temporadas**: Detalles completos de temporadas y episodios para series
+- 📱 **Proveedores de streaming**: Información sobre dónde ver el contenido
+- 🎭 **Información de temporadas**: Detalles completos de temporadas y episodios
 - 🎨 **Diseño responsive**: Interfaz adaptable a todos los dispositivos
 
 ## 🚀 Tecnologías
@@ -62,39 +61,72 @@ Una aplicación web que permite explorar películas y series de televisión, con
 ```
 films-app/
 ├── src/
-│   ├── app/                    # App Router de Next.js
-│   │   ├── movie/[id]/        # Páginas de detalles de películas
-│   │   ├── movies/            # Página de exploración de películas
-│   │   ├── tv/[id]/           # Páginas de detalles de series
-│   │   ├── series/            # Página de exploración de series
-│   │   ├── layout.tsx         # Layout principal
-│   │   └── page.tsx           # Página de inicio
-│   ├── components/            # Componentes reutilizables
-│   │   ├── Carousels/        # Carruseles de medios
-│   │   ├── Credits/          # Información de reparto
-│   │   ├── Filters/          # Componentes de filtrado
-│   │   ├── Footer/           # Pie de página
-│   │   ├── Loading/          # Estados de carga
-│   │   ├── Media/            # Tarjetas de medios
-│   │   ├── Navbar/           # Barra de navegación
-│   │   ├── Ratings/          # Sistema de calificaciones
-│   │   ├── Seasons/          # Información de temporadas
-│   │   ├── TrailerPlayer/    # Reproductor de tráilers
-│   │   └── WatchProviders/   # Proveedores de streaming
-│   ├── lib/                   # Lógica de negocio
-│   │   ├── endpoints.ts      # Endpoints de la API
-│   │   └── fetchData.ts      # Función de fetch
-│   ├── types/                 # Definiciones de TypeScript
-│   │   └── tmdb.ts           # Tipos de TMDB
-│   ├── utils/                 # Utilidades
-│   └── styles/                # Estilos globales
-│       └── globals.css
-├── public/                    # Archivos estáticos
-├── .env                       # Variables de entorno
-├── next.config.mjs           # Configuración de Next.js
-├── tailwind.config.js        # Configuración de Tailwind
-├── tsconfig.json             # Configuración de TypeScript
-└── package.json              # Dependencias del proyecto
+│   ├── app/                      # App Router de Next.js
+│   │   ├── collections/[id]/     # Detalles de colecciones
+│   │   ├── movies/               # Exploración de películas
+│   │   │   ├── [id]/            # Detalles de película individual
+│   │   │   ├── layout.tsx       # Layout de películas
+│   │   │   └── page.tsx         # Listado de películas
+│   │   ├── series/               # Exploración de series
+│   │   │   ├── [id]/            # Detalles de serie individual
+│   │   │   ├── layout.tsx       # Layout de series
+│   │   │   └── page.tsx         # Listado de series
+│   │   ├── layout.tsx            # Layout principal de la app
+│   │   ├── loading.tsx           # Estado de carga global
+│   │   └── page.tsx              # Página de inicio
+│   ├── components/               # Componentes reutilizables
+│   │   ├── Carousels/           # Carruseles de contenido
+│   │   │   ├── CarouselButton.tsx
+│   │   │   ├── HeroCarousel.tsx
+│   │   │   └── MediaCarousel.tsx
+│   │   ├── Credits/             # Información de reparto
+│   │   │   └── MediaCredits.tsx
+│   │   ├── Filters/             # Componentes de filtrado
+│   │   │   └── FilterBar.tsx
+│   │   ├── Footer/              # Pie de página
+│   │   │   ├── ContactSection.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   └── GoToTopButton.tsx
+│   │   ├── Loading/             # Estados de carga
+│   │   │   └── GlobalSpinner.tsx
+│   │   ├── Media/               # Grids y tarjetas de medios
+│   │   │   ├── CollectionsGrid.tsx
+│   │   │   └── MediaGrid.tsx
+│   │   ├── Navbar/              # Barra de navegación
+│   │   │   ├── MobileMenu.tsx
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Searchbar.tsx
+│   │   │   └── SearchDropdown.tsx
+│   │   ├── Ratings/             # Sistema de calificaciones
+│   │   │   └── StarRating.tsx
+│   │   ├── Seasons/             # Información de temporadas
+│   │   │   └── SeasonInfo.tsx
+│   │   ├── TrailerPlayer/       # Reproductor de tráilers
+│   │   │   └── TrailerPlayer.tsx
+│   │   └── WatchProviders/      # Proveedores de streaming
+│   │       └── WatchProvidersInfo.tsx
+│   ├── lib/                      # Lógica de negocio y APIs
+│   │   ├── endpoints.ts         # Endpoints de TMDB API
+│   │   └── fetchData.ts         # Función de fetch centralizada
+│   ├── types/                    # Definiciones de TypeScript
+│   │   └── tmdb.ts              # Tipos de TMDB API
+│   ├── utils/                    # Funciones utilitarias
+│   │   ├── cleanCollectionName.ts
+│   │   ├── formatDate.ts
+│   │   ├── generateMediaMetadata.ts
+│   │   ├── genreTranslations.ts
+│   │   └── getYear.ts
+│   └── styles/                   # Estilos globales
+│       └── globals.css          # CSS global con Tailwind
+├── public/                       # Archivos estáticos
+│   └── icons/                   # Iconos SVG
+├── .env                          # Variables de entorno
+├── .gitignore                    # Archivos ignorados por Git
+├── eslint.config.mjs            # Configuración de ESLint
+├── next.config.mjs              # Configuración de Next.js
+├── postcss.config.mjs           # Configuración de PostCSS
+├── tsconfig.json                # Configuración de TypeScript
+└── package.json                 # Dependencias del proyecto
 ```
 
 ## 🛠️ Instalación
@@ -154,49 +186,7 @@ pnpm run start        # Inicia el servidor de producción
 pnpm run lint         # Ejecuta ESLint
 ```
 
-## 🎯 Funcionalidades Principales
-
-### Página de Inicio
-
-- Carrusel hero con contenido trending
-- Secciones de series populares y nuevos episodios
-- Películas en cartelera y próximos estrenos
-- Películas mejor valoradas
-
-### Exploración de Contenido
-
-- **Películas**: Filtrado por categoría (popular, mejor valoradas, en cartelera, próximos estrenos)
-- **Series**: Filtrado por categoría (popular, mejor valoradas, al aire hoy, nuevos episodios)
-- Filtrado adicional por género
-- Grid responsive de tarjetas de medios
-
-### Páginas de Detalles
-
-- Información completa del contenido
-- Calificaciones con estrellas
-- Reparto y equipo de producción
-- Tráilers y videos relacionados
-- Proveedores de streaming disponibles
-- Contenido similar
-- Información de temporadas y episodios (series)
-
-## 🔧 Configuración de la API
-
-La aplicación utiliza la API v3 de TMDB con las siguientes características:
-
-- **Idioma**: Español (es-ES)
-- **Autenticación**: Bearer Token
-- **Endpoints principales**:
-  - `/movie/*` - Información de películas
-  - `/tv/*` - Información de series
-  - `/trending/*` - Contenido trending
-  - `/discover/*` - Descubrimiento de contenido
-  - `/search/multi` - Búsqueda multi-tipo
-  - `/genre/*` - Listados de géneros
-
 ## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
 
 1. Haz fork del proyecto
 2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
@@ -206,7 +196,7 @@ Las contribuciones son bienvenidas. Por favor:
 
 ## 📝 Licencia
 
-Este proyecto está licenciado bajo [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Este proyecto está bajo la licencia [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ### ✅ Puedes:
 
@@ -229,8 +219,6 @@ Este proyecto está licenciado bajo [Creative Commons Attribution-NonCommercial-
 - Integrar en aplicaciones empresariales comerciales
 
 ---
-
-**Copyright © 2025 Aaron García. Todos los derechos reservados bajo CC BY-NC-SA 4.0.**
 
 ## 📧 Contacto
 
